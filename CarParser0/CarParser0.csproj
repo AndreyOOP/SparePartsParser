@@ -43,10 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Logger\ILogger.cs" />
-    <Compile Include="Logger\ITimeProvider.cs" />
+    <Compile Include="TimeProvider\ITimeProvider.cs" />
     <Compile Include="Logger\LoggerToExcel.cs" />
     <Compile Include="Logger\LoggerToTextFile.cs" />
-    <Compile Include="Logger\TimeProvider.cs" />
+    <Compile Include="TimeProvider\TimeProvider.cs" />
     <Compile Include="MainLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

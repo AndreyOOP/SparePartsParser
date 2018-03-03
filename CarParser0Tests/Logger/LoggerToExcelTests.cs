@@ -8,7 +8,7 @@ namespace CarParser0.Logger.Tests
     public class LoggerToExcelTests
     {
         [TestMethod()]
-        public void LoggerToExcelTest()
+        public void LoggerToExcelTest() //how to test ?
         {
             string path = T.TEST_FOLDER + T.LOGGER + "x.xlsx";
 
@@ -16,17 +16,11 @@ namespace CarParser0.Logger.Tests
 
             Logger.Log("Hello x");
 
-            //Thread.Sleep(1100);
+            Thread.Sleep(1100);
             Logger.Log("Hello 2x");
 
-            //Thread.Sleep(1100);
+            Thread.Sleep(1100);
             Logger.Log("Привет!x");
-
-            //LoggerToExcel le = new LoggerToExcel(path, new TimeProvider());
-
-            //such way disposes an object but we have to manually call Dispose method
-            //LoggerToExcel le = (LoggerToExcel)Logger; 
-            //le.Dispose();
         }
     }
 }

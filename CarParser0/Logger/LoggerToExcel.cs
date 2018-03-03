@@ -1,22 +1,19 @@
 ﻿using System;
 using Microsoft.Office.Interop.Excel;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using System.IO;
 
 namespace CarParser0.Logger
 {
-    public class LoggerToExcel : ILogger //, IDisposable
+    public class LoggerToExcel : ILogger
     {
-        Workbook wb;
-        Application app;
-        Worksheet ws;
-        string path;
+        private Workbook    wb;
+        private Application app;
+        private Worksheet   ws;
+        private Int32       line;
 
-        ITimeProvider timer;
-        int line = 1;
+        private String path;
+        private ITimeProvider timer;
 
         public LoggerToExcel(string path, ITimeProvider timer)
         {
@@ -24,19 +21,25 @@ namespace CarParser0.Logger
 
             this.path = path;
 
-
+            //always recreate log file
             app = new Application();
-
             app.Visible = false;
+            
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
 
-            wb = app.Workbooks.Open(path);
-
+            wb = app.Workbooks.Add();
+            wb.SaveAs(path);
+            //wb = app.Workbooks.Open(path); //?
             ws = (Worksheet)wb.Sheets[1];
+
+            line = 1;
         }
 
         ~LoggerToExcel()
         {
-            //Dispose();
             try
             {
                 wb.Close();
@@ -47,40 +50,24 @@ namespace CarParser0.Logger
                 Console.WriteLine(ex);
             }
 
-            if (ws != null) Marshal.ReleaseComObject(ws);
-            if (wb != null) Marshal.ReleaseComObject(wb);
-            if (app != null) Marshal.ReleaseComObject(app);
+            if (ws != null)
+                Marshal.ReleaseComObject(ws);
+
+            if (wb != null)
+                Marshal.ReleaseComObject(wb);
+
+            if (app != null)
+                Marshal.ReleaseComObject(app);
         }
-
-        //public void Dispose()
-        //{
-        //    wb.Close();
-        //    app.Quit();
-
-        //    if (ws != null) Marshal.ReleaseComObject(ws);
-        //    if (wb != null) Marshal.ReleaseComObject(wb);
-        //    if (app != null) Marshal.ReleaseComObject(app);
-        //}
-
-        //public void Dispose2()
-        //{
-        //    wb.Close();
-        //    app.Quit();
-
-        //    if (ws != null) Marshal.ReleaseComObject(ws);
-        //    if (wb != null) Marshal.ReleaseComObject(wb);
-        //    if (app != null) Marshal.ReleaseComObject(app);
-        //}
 
         public void Log(string message)
         {
-            
             string datetime = timer.getCurrentTime();
             string[] arr = datetime.Split('|');
 
-            ws.Cells[line, 1] = arr[0]; //rows columns
-            ws.Cells[line, 2] = arr[1]; //rows columns
-            ws.Cells[line++, 3] = message; //rows columns
+            ws.Cells[line, 1]   = arr[0]; //rows columns
+            ws.Cells[line, 2]   = arr[1];
+            ws.Cells[line++, 3] = message;
 
             wb.Save();
         }
