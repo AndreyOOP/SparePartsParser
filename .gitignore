@@ -1,0 +1,7 @@
+/.vs
+/packages
+/TestResults
+/CarParser0Tests/bin
+/CarParser0Tests/obj
+/CarParser0/bin
+/CarParser0/obj
