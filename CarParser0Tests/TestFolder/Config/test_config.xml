@@ -1,0 +1,4 @@
+﻿<logger>
+	<path>test_path</path>
+	<type>test_type</type>
+</logger>

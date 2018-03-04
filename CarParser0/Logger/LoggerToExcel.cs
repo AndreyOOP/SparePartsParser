@@ -32,7 +32,6 @@ namespace CarParser0.Logger
 
             wb = app.Workbooks.Add();
             wb.SaveAs(path);
-            //wb = app.Workbooks.Open(path); //?
             ws = (Worksheet)wb.Sheets[1];
 
             line = 1;
@@ -70,6 +69,8 @@ namespace CarParser0.Logger
             ws.Cells[line++, 3] = message;
 
             wb.Save();
+
+            Console.WriteLine("{0}|{1}|{2}", arr[0], arr[1], message);
         }
     }
 }

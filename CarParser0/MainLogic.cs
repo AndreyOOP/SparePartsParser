@@ -1,4 +1,5 @@
-﻿using CarParser0.Logger;
+﻿using CarParser0.ConfigNS;
+using CarParser0.Logger;
 using System;
 
 namespace CarParser0
@@ -9,34 +10,30 @@ namespace CarParser0
 
         static void Main(string[] args)
         {
-            try
-            {
-                Initialization();
+            String ConfigPath = "config.xml";
 
-                Console.WriteLine("Test");
+            //Config config = new Config(ConfigPath);
 
-                //input module
-                //config parameters e.g. path
-                //output list of Models
+            Initialization(new Config(ConfigPath));
 
-                Console.ReadLine();
+            Logger.Log("Test Msg 1");
+            Logger.Log("Test Msg 2");
+            Logger.Log("Test Msg 3");
 
-                Logger.Log("End of execution");
-            }
-            finally{
-                Console.WriteLine("Error");
-                Console.WriteLine("Error");
-                Console.WriteLine("Error");
-                Console.WriteLine("Error");
-                Console.WriteLine("Error");
-            }
+            Console.ReadLine();
             
         }
 
-        static void Initialization()
+        static void Initialization(Config config)
         {
-            //Logger = new LoggerToTextFile("Log.txt", new TimeProvider());
-            Logger = new LoggerToExcel("C:\\Users\\Anik\\Desktop\\Log.xlsx", new TimeProvider()); //have to be complete path
+            if(config.LogType == "txt")
+            {
+                Logger = new LoggerToTextFile(config.LogPath, new TimeProvider());
+            }
+            else if (config.LogType == "excel")
+            {
+                Logger = new LoggerToExcel(config.LogPath, new TimeProvider());
+            }
 
             Logger.Log("Initialized");
         }

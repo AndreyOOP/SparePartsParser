@@ -56,6 +56,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Config\ConfigTests.cs" />
     <Compile Include="Logger\LoggerToExcelTests.cs" />
     <Compile Include="Logger\LoggerToTextFileTests.cs" />
     <Compile Include="Logger\TestTimer.cs" />

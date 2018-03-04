@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigF\Config.cs" />
     <Compile Include="Logger\ILogger.cs" />
     <Compile Include="TimeProvider\ITimeProvider.cs" />
     <Compile Include="Logger\LoggerToExcel.cs" />
