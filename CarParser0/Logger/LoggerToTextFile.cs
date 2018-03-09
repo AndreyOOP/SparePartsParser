@@ -15,11 +15,6 @@ namespace CarParser0.Logger
             this.timer = timer;
         }
 
-        public void Dispose2()
-        {
-            throw new NotImplementedException();
-        }
-
         public void Log(string message)
         {
             string logMsg = timer.getCurrentTime() + message + "\r\n";
@@ -28,7 +23,5 @@ namespace CarParser0.Logger
 
             Console.Write(logMsg);
         }
-
-
     }
 }

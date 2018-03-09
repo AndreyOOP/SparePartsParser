@@ -1,4 +1,11 @@
-﻿<logger>
-	<path>test_path</path>
-	<type>test_type</type>
-</logger>
+﻿<root>
+	<logger>
+		<path>test_path</path>
+		<type>txt</type>
+	</logger>
+	<input>
+		<path>test_path_2</path>
+		<type>excel</type>
+	</input>
+</root>
+
