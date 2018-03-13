@@ -26,7 +26,7 @@ namespace CarParser0.DataStore.Tests
             CSVDataStore.Save(Info);
 
             var expected = "\r\n" +
-                           "id; sit; qty; price\r\n" +
+                           "id; site; qty; price\r\n" +
                            "MD51; some site; 4; 123.4\r\n";
 
             Assert.AreEqual(expected, File.ReadAllText(Storage));

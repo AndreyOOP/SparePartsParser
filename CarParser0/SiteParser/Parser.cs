@@ -34,10 +34,10 @@ namespace CarParser0.SiteParser
                     {
                         parsedInfo = parser.Parse(id);
 
-                        Logger.Log("Information for id " + id + " succesfully parsed");
-
                         if (parsedInfo.Count > 0)
                         {
+                            Logger.Log("Information for id " + id + " succesfully parsed");
+
                             foreach (SiteInfo i in parsedInfo)
                                 DataSaver.Save(i);
                         }

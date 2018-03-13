@@ -9,7 +9,7 @@ namespace CarParser0.SiteParser.Tests
     public class ParserTests
     {
         [TestMethod()]
-        public void ExecuteTest()
+        public void ParserTest()
         {
             var Ids = new List<string>() { "id_1", "id_2" };
             var Parsers = new List<IAbstractSiteParser>() { new ParserMock("parser_1"), new ParserMock("parser_2") };

@@ -15,6 +15,7 @@ namespace CarParser0.DataStore.Tests
         {
             var config = new Config();
 
+            SetProperty(config, "StorePath", "storage.csv");
             SetProperty(config, "StoreType", DataStoreType.CSV);
 
             var DataStore = DataStoreFactory.CreateDataStore(config, new LogMock());

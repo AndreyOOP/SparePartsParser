@@ -95,7 +95,6 @@
     <Compile Include="InputProvider\InputProviderFactory.cs" />
     <Compile Include="InputProvider\IInputProvider.cs" />
     <Compile Include="Logger\ILogger.cs" />
-    <Compile Include="Logger\LoggerFactory.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -105,7 +104,6 @@
     <Compile Include="SiteParser\IAbstractSiteParser.cs" />
     <Compile Include="SiteParser\Parser.cs" />
     <Compile Include="Logger\TimeProvider\ITimeProvider.cs" />
-    <Compile Include="Logger\LoggerToExcel.cs" />
     <Compile Include="Logger\LoggerToTextFile.cs" />
     <Compile Include="Logger\TimeProvider\TimeProvider.cs" />
     <Compile Include="MainLogic.cs" />

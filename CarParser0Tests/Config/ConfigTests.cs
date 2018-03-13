@@ -30,7 +30,6 @@ namespace CarParser0.ConfigNS.Tests
             Assert.AreEqual("data reader path", config.ReaderPath);
             Assert.AreEqual("data store path" , config.StorePath);
 
-            Assert.AreEqual(LoggerType.TXT   , config.LogType);
             Assert.AreEqual(InputType.EXCEL  , config.ReaderType);
             Assert.AreEqual(DataStoreType.CSV, config.StoreType);
         }
@@ -49,21 +48,6 @@ namespace CarParser0.ConfigNS.Tests
             String path = folder + "err_config.xml";
 
             Assert.ThrowsException<XmlException>( () => new Config().Load(path) );
-        }
-
-        [TestMethod()]
-        public void ConfigFileIncorrectTypeTest()
-        {
-            String path = folder + "err_type_config.xml";
-
-            try
-            {
-                new Config().Load(path);
-            }
-            catch(Exception ex)
-            {
-                Assert.AreEqual("Incorrect logger type", ex.Message);
-            }
         }
     }
 }

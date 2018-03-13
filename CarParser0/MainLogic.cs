@@ -1,50 +1,45 @@
-﻿using CarParser0.ConfigNS;
+﻿//#define READ_KEY
+
+using CarParser0.ConfigNS;
 using CarParser0.DataStore;
-using CarParser0.DTO;
 using CarParser0.InputReaderFolder;
 using CarParser0.Logger;
 using CarParser0.SiteParser;
 using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace CarParser0
 {
-    class MainLogic
+    public class MainLogic
     {
         private static Config Config;
 
         private static ILogger Logger;
         private static List<IAbstractSiteParser> Parsers;
         private static IInputProvider Reader;
-        private static IDataStore store;
-        private static List<String> ids;
-        private static Parser parser;
+        private static IDataStore Store;
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Config = LoadConfig(args);
 
-            if (Config == null)
+            if(Config != null)
             {
-                Console.ReadKey();
-                return;
+                Initialization(Config);
+
+                var Ids = Reader.GetInputData();
+                Logger.Log("Read " + Ids.Count + " ids from " + Config.ReaderPath);
+
+                var DataScrapper = new Parser(Ids, Parsers, Store, Logger);
+                Logger.Log("Initialize data scrapper");
+
+                DataScrapper.Execute();
+                Logger.Log("Execution complete");
             }
 
-            Initialization(Config);
-
-            ids = Reader.GetInputData();
-            
-            //Parser parser = new Parser(parsers, ids, Logger);
-
-            //List<SiteInfo> info = parser.Execute(); //add ids here to execute
-
-            //foreach(SiteInfo i in info)
-            //{
-            //    store.Save(i);
-            //}
-
-            Console.ReadKey();
+            #if DEBUG == false
+                Console.ReadKey();
+            #endif
         }
 
         static Config LoadConfig(string[] args)
@@ -69,33 +64,17 @@ namespace CarParser0
 
         static void Initialization(Config config)
         {
-            Logger = LoggerFactory.Instantiate(config);
-
-            Logger.Log("Logger Initialized"); 
-
-
-            Parsers = new List<IAbstractSiteParser>();
-
-            //Parsers.Add(new Auto911Parser());
-
-            Logger.Log("Parsers Initialized");
-
+            Logger = new LoggerToTextFile(config.LogPath, new TimeProvider());
+            Logger.Log("Logger initialized");
 
             Reader = InputProviderFactory.CreateInputReader(config);
-            Logger.Log("Reader Initialized, type: " + Reader.GetType().Name);
+            Logger.Log("Reader of type " + Reader.GetType().Name + " initialized");
 
-            //store = DataStoreFactory.CreateDataStore(config);
-            Logger.Log("DataStore Initialized");
+            Parsers = new List<IAbstractSiteParser>() { new Auto911Parser("SiteParser/IE Driver/", Logger) };
+            Logger.Log("Site parsers initialized");
 
-            ids = new List<String>();
-
-            //ids.Add("MD619865");
-            //ids.Add("MD619865");
-            //Logger.Log("Models Added");
-
-            //parser = new Parser(Parsers, ids, Logger); //ids have to be moved out
-
-            Logger.Log("Initialization Complete");
+            Store = DataStoreFactory.CreateDataStore(config, Logger);
+            Logger.Log("DataStore of type " + Store.GetType() + "Initialized");
         }
     }
 }

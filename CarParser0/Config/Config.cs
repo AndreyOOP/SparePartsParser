@@ -9,7 +9,6 @@ namespace CarParser0.ConfigNS
     public class Config
     {
         public String     LogPath { get; private set; }
-        public LoggerType LogType { get; private set; }
 
         public String    ReaderPath { get; private set; }
         public InputType ReaderType { get; private set; }
@@ -27,7 +26,6 @@ namespace CarParser0.ConfigNS
             xml.Load(path);
 
             LogPath = GetNodeText(xml, "root/logger/path");
-            LogType = GetLoggerType(xml, "root/logger/type");
 
             ReaderPath = GetNodeText(xml, "root/input/path");
             ReaderType = GetReaderType(xml, "root/input/type");

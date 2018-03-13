@@ -1,0 +1,14 @@
+﻿<root>
+	<logger>
+		<path>IT_Logger.txt</path>
+	</logger>
+	<input>
+    <type>csv</type>
+    <path>Integration Test/IT_Input.csv</path>
+	</input>
+  <store>
+    <type>csv</type>
+    <path>IT_Storage.csv</path>
+  </store>
+</root>
+

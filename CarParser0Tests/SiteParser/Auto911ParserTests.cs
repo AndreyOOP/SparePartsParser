@@ -5,7 +5,7 @@ using CarParser0Tests.SiteParser.ParserMocks;
 
 namespace CarParser0.SiteParser.Tests
 {
-    [TestClass()]
+    [TestClass()] //todo how to correctly test it ?
     public class Auto911ParserTests
     {
         [TestMethod()]
@@ -15,7 +15,7 @@ namespace CarParser0.SiteParser.Tests
 
             List<SiteInfo> actual = parser.Parse("MD619865");
 
-            Assert.AreEqual("id: MD619865; site: 911auto; qty: -; price: 818", actual[0].ToString());
+            Assert.AreEqual("id: MD619865; site: 911auto; qty: -; price: 822", actual[0].ToString());
         }
     }
 }

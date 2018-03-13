@@ -1,19 +1,19 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CarParser0Tests.Logger;
 using System.IO;
-using CarParser0Tests;
 
 namespace CarParser0.Logger.Tests
 {
     [TestClass()]
     public class LoggerToTextFileTests
     {
-        string pathToLog = T.TEST_FOLDER + T.LOGGER + "test_log.txt";
+        string pathToLog = "test_log.txt";
 
         [TestInitialize()]
         public void Initialize()
         {
-            File.Delete(pathToLog);
+            if(File.Exists(pathToLog))
+                File.Delete(pathToLog);
         }
 
         [TestMethod()]
