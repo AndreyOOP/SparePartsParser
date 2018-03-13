@@ -12,29 +12,28 @@ namespace CarParser0
 {
     class MainLogic
     {
-        private static Config config;
+        private static Config Config;
 
         private static ILogger Logger;
         private static List<IAbstractSiteParser> parsers;
-        private static IReader reader;
+        private static IInputProvider reader;
         private static IDataStore store;
         private static List<String> ids;
         private static Parser parser;
 
         static void Main(string[] args)
         {
-            Config config = LoadConfig(args);
+            Config = LoadConfig(args);
 
-            if (config == null)
+            if (Config == null)
             {
                 Console.ReadKey();
                 return;
             }
 
+            Initialization(Config);
 
-            Initialization(config);
-
-            ids = reader.ReadData();
+            ids = reader.GetInputData();
             
             //Parser parser = new Parser(parsers, ids, Logger);
 
@@ -59,7 +58,7 @@ namespace CarParser0
 
             try
             {
-                return new Config(path);
+                return new Config().Load(path);
             }
             catch (Exception ex)
             {
@@ -71,14 +70,14 @@ namespace CarParser0
         static void Initialization(Config config)
         {
             Logger = LoggerFactory.Instantiate(config);
-            Logger.Log("Logger Initialized");
+            Logger.Log("Logger Initialized"); 
 
-            parsers = new List<IAbstractSiteParser>();
+            parsers = new List<IAbstractSiteParser>(); //parsers factory ?
             parsers.Add(new Auto911Parser());
             Logger.Log("Parsers Initialized");
 
-            reader = InputReaderFactory.CreateReader(config);
-            Logger.Log("Reader Initialized");
+            reader = InputProviderFactory.CreateInputReader(config);
+            Logger.Log("Reader Initialized, type: " + reader.GetType().Name);
 
             store = DataStoreFactory.CreateDataStore(config);
             Logger.Log("DataStore Initialized");

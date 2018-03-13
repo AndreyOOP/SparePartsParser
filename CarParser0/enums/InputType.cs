@@ -2,6 +2,6 @@
 {
     public enum InputType
     {
-        EXCEL, CSV
+        EXCEL, CSV, SQL
     }
 }

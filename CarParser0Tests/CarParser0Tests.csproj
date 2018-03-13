@@ -58,12 +58,17 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Config\ConfigTests.cs" />
+    <Compile Include="InputProvider\InputReaderFactoryTests.cs" />
+    <Compile Include="InputReaderFolder\CSVReaderTests.cs" />
     <Compile Include="Logger\LoggerToExcelTests.cs" />
     <Compile Include="Logger\LoggerToTextFileTests.cs" />
     <Compile Include="Logger\TestTimer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SiteParser\Auto911ParserTests.cs" />
+    <Compile Include="SiteParser\ParserMocks\LogMock.cs" />
+    <Compile Include="SiteParser\ParserMocks\ParserMock.cs" />
     <Compile Include="SiteParser\ParserSampleTests.cs" />
+    <Compile Include="SiteParser\ParserTests.cs" />
     <Compile Include="T.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -74,6 +79,17 @@
       <Project>{1D482DEF-B548-419A-974D-FB11D1E71F3F}</Project>
       <Name>CarParser0</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\TestFiles\err_config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\TestFiles\err_type_config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\TestFiles\test_config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

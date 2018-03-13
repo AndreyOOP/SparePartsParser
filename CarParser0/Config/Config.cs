@@ -8,21 +8,16 @@ namespace CarParser0.ConfigNS
 {
     public class Config
     {
-        private String path;
+        public String     LogPath { get; private set; }
+        public LoggerType LogType { get; private set; }
 
-        public String     LogPath { get; }
-        public LoggerType LogType { get; }
+        public String    ReaderPath { get; private set; }
+        public InputType ReaderType { get; private set; }
 
-        public String    ReaderPath { get; }
-        public InputType ReaderType { get; }
-
-
-        public Config(String path)
+        public Config Load(String path)
         {
             if (!File.Exists(path))
                 throw new FileNotFoundException("Config file not found");
-
-            this.path = path;
 
             XmlDocument xml = new XmlDocument();
 
@@ -35,14 +30,16 @@ namespace CarParser0.ConfigNS
             ReaderPath = GetNodeText(xml, "root/input/path");
 
             ReaderType = GetReaderType(xml, "root/input/type");
+
+            return this;
         }
 
-        private String GetNodeText(XmlDocument xml, String path)
+        private String GetNodeText(XmlDocument xml, String xmlPath)
         {
-            XmlNode node = xml.SelectSingleNode(path);
+            XmlNode node = xml.SelectSingleNode(xmlPath);
 
             if (node == null)
-                throw new XmlException("Could not load property " + path);
+                throw new XmlException("Could not load property " + xmlPath);
 
             return node.InnerText;
         }
@@ -73,7 +70,7 @@ namespace CarParser0.ConfigNS
                     return InputType.EXCEL;
 
                 default:
-                    throw new Exception("Incorrect input type");
+                    throw new Exception("Incorrect input reader type");
             }
         }
     }

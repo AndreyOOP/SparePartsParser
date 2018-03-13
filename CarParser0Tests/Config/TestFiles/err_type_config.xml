@@ -1,0 +1,10 @@
+﻿<root>
+  <logger>
+    <path>logger path</path>
+    <type>zzz</type>
+  </logger>
+  <input>
+    <path>data reader path</path>
+    <type>excel</type>
+  </input>
+</root>

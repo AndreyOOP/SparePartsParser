@@ -4,7 +4,7 @@ using System.IO;
 
 namespace CarParser0.InputReaderFolder //to test it
 {
-    public class CSVReader : IReader
+    public class CSVReader : IInputProvider
     {
         private String path;
 
@@ -13,11 +13,15 @@ namespace CarParser0.InputReaderFolder //to test it
             this.path = path;
         }
 
-        public List<string> ReadData()
+        public List<string> GetInputData()
         {
+            if (!File.Exists(path))
+                throw new FileNotFoundException("File with input data could not be found");
+
             String fileData = File.ReadAllText(path);
 
             fileData = fileData.Replace(" ", String.Empty);
+            fileData = fileData.Replace("\r\n", String.Empty);
 
             return new List<string>( fileData.Split(','));
         }

@@ -47,7 +47,7 @@ namespace CarParser0.SiteParser
                             //todo add save here, saver have to be injected; no return needed
                             foreach (SiteInfo i in singleParserInfo)
                             {
-                                Console.WriteLine(i);
+                                //Console.WriteLine(i);
                                 logger.Log(i.ToString());
                             }
                         }

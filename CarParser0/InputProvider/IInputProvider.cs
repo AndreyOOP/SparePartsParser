@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace CarParser0.InputReaderFolder
 {
-    interface IReader
+    public interface IInputProvider
     {
-        List<String> ReadData();
+        List<String> GetInputData();
     }
 }

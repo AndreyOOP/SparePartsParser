@@ -1,46 +1,67 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
-using CarParser0Tests;
 using CarParser0.ConfigF.enums;
 using CarParser0.ConfigF;
 using System.Xml;
 
 namespace CarParser0.ConfigNS.Tests
 {
+    /*
+     * Try to implement as singleton, no need to have few instances
+     * as well looks strange -> new Config().Load(path), create an instance just to call one method
+     * 
+     * When try singleton everything become static... how correctly use? impossible to inject as dependency
+     */
     [TestClass()]
     public class ConfigTests
     {
+        String folder = "Config/TestFiles/";
 
         [TestMethod()]
         public void ConfigTest()
         {
-            String path = T.TEST_FOLDER + T.CONFIG + "test_config.xml";
+            String path = folder + "test_config.xml";
 
-            Config config = new Config(path);
+            Config config = new Config().Load(path);
 
 
-            Assert.AreEqual("test_path", config.LogPath);
-            Assert.AreEqual("test_path_2", config.ReaderPath);
+            Assert.AreEqual("logger path"     , config.LogPath);
+            Assert.AreEqual("data reader path", config.ReaderPath);
 
-            Assert.AreEqual(LoggerType.TXT, config.LogType);
+            Assert.AreEqual(LoggerType.TXT , config.LogType);
             Assert.AreEqual(InputType.EXCEL, config.ReaderType);
         }
 
         [TestMethod()]
         public void ConfigFileNotFoundTest()
         {
-            String path = T.TEST_FOLDER + T.CONFIG + "not_existing_file.xml";
+            String path = "not_existing_file.xml";
 
-            Assert.ThrowsException<FileNotFoundException>( () => new Config(path) );
+            Assert.ThrowsException<FileNotFoundException>( () => new Config().Load(path) );
         }
 
         [TestMethod()]
         public void ConfigFileExceptionTest()
         {
-            String path = T.TEST_FOLDER + T.CONFIG + "err_config.xml";
+            String path = folder + "err_config.xml";
 
-            Assert.ThrowsException<XmlException>( () => new Config(path) );
+            Assert.ThrowsException<XmlException>( () => new Config().Load(path) );
+        }
+
+        [TestMethod()]
+        public void ConfigFileIncorrectTypeTest()
+        {
+            String path = folder + "err_type_config.xml";
+
+            try
+            {
+                new Config().Load(path);
+            }
+            catch(Exception ex)
+            {
+                Assert.AreEqual("Incorrect logger type", ex.Message);
+            }
         }
     }
 }
