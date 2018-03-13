@@ -5,6 +5,7 @@ using OpenQA.Selenium.IE;
 using OpenQA.Selenium;
 using CarParser0.Logger;
 using System.IO;
+using System.Threading;
 
 namespace CarParser0.SiteParser
 {
@@ -32,6 +33,8 @@ namespace CarParser0.SiteParser
                 try
                 {
                     driver.Navigate().GoToUrl(url + id);
+
+                    Thread.Sleep(2000); //todo, temporary solution, just delay so site could completely loaded
                 }
                 catch (Exception ex)
                 {
@@ -50,6 +53,26 @@ namespace CarParser0.SiteParser
                 {
                     Logger.Log("911auto: Could not get price for id: " + id + ex.Message);
                 }
+
+                //todo refactor
+                try
+                {
+                    var nodeR = driver.FindElementById("zakaz_blk_svc");
+                    var elems = nodeR.FindElements(By.CssSelector("tbody > tr:not(.head)"));
+
+                    for(int i=0; i<elems.Count; i++)
+                    {
+                        var qt = elems[i].FindElement( By.CssSelector("td:nth-child(4)") ).Text;
+                        var pr = elems[i].FindElement( By.CssSelector("td:last-child") ).Text;
+
+                        infoList.Add(new SiteInfo(id, pr, qt, "911auto"));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log("911auto: Could not get price for id: " + id + ex.Message);
+                }
+                
             }
 
             return infoList;
