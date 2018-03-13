@@ -102,9 +102,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SiteParser\911Parser.cs" />
-    <Compile Include="SiteParser\AbstractSiteParser.cs" />
+    <Compile Include="SiteParser\IAbstractSiteParser.cs" />
     <Compile Include="SiteParser\Parser.cs" />
-    <Compile Include="SiteParser\ParserSample.cs" />
     <Compile Include="Logger\TimeProvider\ITimeProvider.cs" />
     <Compile Include="Logger\LoggerToExcel.cs" />
     <Compile Include="Logger\LoggerToTextFile.cs" />
@@ -155,6 +154,11 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SiteParser\IE Driver\IEDriverServer.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Selenium.WebDriver.IEDriver.3.10.0\build\Selenium.WebDriver.IEDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.IEDriver.3.10.0\build\Selenium.WebDriver.IEDriver.targets')" />

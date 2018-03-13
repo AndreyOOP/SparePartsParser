@@ -1,11 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CarParser0.SiteParser;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CarParser0.DTO;
+using CarParser0Tests.SiteParser.ParserMocks;
 
 namespace CarParser0.SiteParser.Tests
 {
@@ -15,11 +11,11 @@ namespace CarParser0.SiteParser.Tests
         [TestMethod()]
         public void ParseTest()
         {
-            Auto911Parser parser = new Auto911Parser();
+            Auto911Parser parser = new Auto911Parser("SiteParser/IE Driver/", new LogMock());
 
-            List<SiteInfo> l = parser.Parse("zzz");
+            List<SiteInfo> actual = parser.Parse("MD619865");
 
-            Assert.AreEqual(1, l.Count);
+            Assert.AreEqual("id: MD619865; site: 911auto; qty: -; price: 818", actual[0].ToString());
         }
     }
 }

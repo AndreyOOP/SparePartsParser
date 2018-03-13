@@ -3,35 +3,53 @@ using System.Collections.Generic;
 using CarParser0.DTO;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium;
+using CarParser0.Logger;
+using System.IO;
 
 namespace CarParser0.SiteParser
 {
     public class Auto911Parser : IAbstractSiteParser
     {
-        private readonly String IE_DRIVER = @"C:\Users\Anik\Documents\Visual Studio 2017\Projects\CarParser0\CarParser0\bin\Debug\";
+        private String ieDriverFolder;
+        private readonly String url = "http://911auto.com.ua/search/";
 
         private List<SiteInfo> infoList;
+        private ILogger Logger;
 
 
-        public List<SiteInfo> Parse(string item)
+        public Auto911Parser(String ieDriverFolder, ILogger Logger)
+        {
+            this.ieDriverFolder = ieDriverFolder;
+            this.Logger = Logger;
+        }
+
+        public List<SiteInfo> Parse(string id)
         {
             infoList = new List<SiteInfo>();
 
-            using (var driver = new InternetExplorerDriver(IE_DRIVER))
+            using (var driver = new InternetExplorerDriver(ieDriverFolder))
             {
-                driver.Navigate().GoToUrl("http://911auto.com.ua/search/" + item);
+                try
+                {
+                    driver.Navigate().GoToUrl(url + id);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log("911auto: Could not open site for id: " + id + ex.Message);
+                }
 
+                String price;
+                try
+                {
+                    var node = driver.FindElementById("product_tbl");
+                    price = node.FindElement(By.CssSelector(".hl > :last-child")).Text;
 
-                var z = driver.FindElementById("product_tbl");
-                var price = z.FindElement( By.CssSelector(".hl > :last-child")).Text;
-
-                var info = new SiteInfo();
-                info.id = item;
-                info.quantity = "-";
-                info.site = "http://911auto.com.ua";
-                info.price = price;
-
-                infoList.Add(info);
+                    infoList.Add(new SiteInfo(id, price, "-", "911auto"));
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log("911auto: Could not get price for id: " + id + ex.Message);
+                }
             }
 
             return infoList;

@@ -2,6 +2,6 @@
 {
     public enum DataStoreType
     {
-        EXCEL, HTML, CSV, TXT, SQL
+        EXCEL, HTML, CSV, SQL
     }
 }

@@ -14,6 +14,9 @@ namespace CarParser0.ConfigNS
         public String    ReaderPath { get; private set; }
         public InputType ReaderType { get; private set; }
 
+        public String StorePath { get; private set; }
+        public DataStoreType StoreType { get; private set; }
+
         public Config Load(String path)
         {
             if (!File.Exists(path))
@@ -24,12 +27,13 @@ namespace CarParser0.ConfigNS
             xml.Load(path);
 
             LogPath = GetNodeText(xml, "root/logger/path");
-
             LogType = GetLoggerType(xml, "root/logger/type");
 
             ReaderPath = GetNodeText(xml, "root/input/path");
-
             ReaderType = GetReaderType(xml, "root/input/type");
+
+            StorePath = GetNodeText(xml, "root/store/path");
+            StoreType = GetStoreType(xml, "root/store/type");
 
             return this;
         }
@@ -71,6 +75,27 @@ namespace CarParser0.ConfigNS
 
                 default:
                     throw new Exception("Incorrect input reader type");
+            }
+        }
+
+        private DataStoreType GetStoreType(XmlDocument xml, String path)
+        {
+            switch (GetNodeText(xml, path))
+            {
+                case "csv":
+                    return DataStoreType.CSV;
+
+                case "html":
+                    return DataStoreType.HTML;
+
+                case "excel":
+                    return DataStoreType.EXCEL;
+
+                case "sql":
+                    return DataStoreType.SQL;
+
+                default:
+                    throw new Exception("Incorrect data store type");
             }
         }
     }

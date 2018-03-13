@@ -1,9 +1,6 @@
 ﻿using CarParser0.SiteParser;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CarParser0.DTO;
 
 namespace CarParser0Tests.SiteParser.ParserMocks
@@ -19,15 +16,12 @@ namespace CarParser0Tests.SiteParser.ParserMocks
 
         public List<SiteInfo> Parse(string item)
         {
-            SiteInfo info = new SiteInfo();
-
-            info.id     = item;
-            info.site   = name ?? "mock";
-            info.quantity = "1";
-            info.price  = "2.2";
+            SiteInfo info1 = new SiteInfo(item, "2.2", "1", name);
+            SiteInfo info2 = new SiteInfo(item, "2.5", "3", name);
 
             List<SiteInfo> list = new List<SiteInfo>();
-            list.Add(info);
+            list.Add(info1);
+            list.Add(info2);
 
             return list;
         }

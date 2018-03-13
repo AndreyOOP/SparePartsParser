@@ -28,9 +28,11 @@ namespace CarParser0.ConfigNS.Tests
 
             Assert.AreEqual("logger path"     , config.LogPath);
             Assert.AreEqual("data reader path", config.ReaderPath);
+            Assert.AreEqual("data store path" , config.StorePath);
 
-            Assert.AreEqual(LoggerType.TXT , config.LogType);
-            Assert.AreEqual(InputType.EXCEL, config.ReaderType);
+            Assert.AreEqual(LoggerType.TXT   , config.LogType);
+            Assert.AreEqual(InputType.EXCEL  , config.ReaderType);
+            Assert.AreEqual(DataStoreType.CSV, config.StoreType);
         }
 
         [TestMethod()]

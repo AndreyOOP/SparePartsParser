@@ -15,8 +15,8 @@ namespace CarParser0
         private static Config Config;
 
         private static ILogger Logger;
-        private static List<IAbstractSiteParser> parsers;
-        private static IInputProvider reader;
+        private static List<IAbstractSiteParser> Parsers;
+        private static IInputProvider Reader;
         private static IDataStore store;
         private static List<String> ids;
         private static Parser parser;
@@ -33,16 +33,16 @@ namespace CarParser0
 
             Initialization(Config);
 
-            ids = reader.GetInputData();
+            ids = Reader.GetInputData();
             
             //Parser parser = new Parser(parsers, ids, Logger);
 
-            List<SiteInfo> info = parser.Execute(); //add ids here to execute
+            //List<SiteInfo> info = parser.Execute(); //add ids here to execute
 
-            foreach(SiteInfo i in info)
-            {
-                store.Save(i);
-            }
+            //foreach(SiteInfo i in info)
+            //{
+            //    store.Save(i);
+            //}
 
             Console.ReadKey();
         }
@@ -70,16 +70,21 @@ namespace CarParser0
         static void Initialization(Config config)
         {
             Logger = LoggerFactory.Instantiate(config);
+
             Logger.Log("Logger Initialized"); 
 
-            parsers = new List<IAbstractSiteParser>(); //parsers factory ?
-            parsers.Add(new Auto911Parser());
+
+            Parsers = new List<IAbstractSiteParser>();
+
+            //Parsers.Add(new Auto911Parser());
+
             Logger.Log("Parsers Initialized");
 
-            reader = InputProviderFactory.CreateInputReader(config);
-            Logger.Log("Reader Initialized, type: " + reader.GetType().Name);
 
-            store = DataStoreFactory.CreateDataStore(config);
+            Reader = InputProviderFactory.CreateInputReader(config);
+            Logger.Log("Reader Initialized, type: " + Reader.GetType().Name);
+
+            //store = DataStoreFactory.CreateDataStore(config);
             Logger.Log("DataStore Initialized");
 
             ids = new List<String>();
@@ -88,7 +93,7 @@ namespace CarParser0
             //ids.Add("MD619865");
             //Logger.Log("Models Added");
 
-            parser = new Parser(parsers, ids, Logger); //ids have to be moved out
+            //parser = new Parser(Parsers, ids, Logger); //ids have to be moved out
 
             Logger.Log("Initialization Complete");
         }

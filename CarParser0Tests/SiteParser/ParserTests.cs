@@ -1,10 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CarParser0.SiteParser;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CarParser0Tests.SiteParser.ParserMocks;
 
 namespace CarParser0.SiteParser.Tests
@@ -15,21 +11,27 @@ namespace CarParser0.SiteParser.Tests
         [TestMethod()]
         public void ExecuteTest()
         {
-            var Parsers = new List<IAbstractSiteParser>();
-            Parsers.Add(new ParserMock("parser_1"));
-            Parsers.Add(new ParserMock("parser_2"));
+            var Ids = new List<string>() { "id_1", "id_2" };
+            var Parsers = new List<IAbstractSiteParser>() { new ParserMock("parser_1"), new ParserMock("parser_2") };
+            var DataStore = new DataStoreMock(); //for the test expected data will be stored into DataStore.StoredData
 
-            var ids = new List<string>();
-            ids.Add("id_1");
-            ids.Add("id_2");
-            ids.Add("id_3");
+            var parser = new Parser(Ids, Parsers, DataStore, new LogMock());
 
+            var expected = new List<String>() {
+                "id: id_1; site: parser_1; qty: 1; price: 2.2",
+                "id: id_1; site: parser_1; qty: 3; price: 2.5",
+                "id: id_2; site: parser_1; qty: 1; price: 2.2",
+                "id: id_2; site: parser_1; qty: 3; price: 2.5",
+                "id: id_1; site: parser_2; qty: 1; price: 2.2",
+                "id: id_1; site: parser_2; qty: 3; price: 2.5",
+                "id: id_2; site: parser_2; qty: 1; price: 2.2",
+                "id: id_2; site: parser_2; qty: 3; price: 2.5"
+            };
 
-            Parser p = new Parser(Parsers, ids, new LogMock());
+            parser.Execute();
 
-            var result = p.Execute();
-
-            Assert.AreEqual(6, result.Count);
+            for (int i = 0; i < expected.Count; i++)
+                Assert.AreEqual(expected[i], DataStore.StoredData[i]);
         }
     }
 }
