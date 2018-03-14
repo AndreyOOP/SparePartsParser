@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace CarParser0.InputReaderFolder //to test it
+namespace CarParser0.InputReaderFolder
 {
     public class CSVReader : IInputProvider
     {

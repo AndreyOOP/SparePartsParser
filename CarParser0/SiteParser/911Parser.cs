@@ -72,7 +72,8 @@ namespace CarParser0.SiteParser
                 {
                     Logger.Log("911auto: Could not get price for id: " + id + ex.Message);
                 }
-                
+
+                driver.Close();
             }
 
             return infoList;
