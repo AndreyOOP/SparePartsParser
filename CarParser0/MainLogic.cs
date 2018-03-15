@@ -1,6 +1,4 @@
-﻿//#define READ_KEY
-
-using CarParser0.ConfigNS;
+﻿using CarParser0.ConfigNS;
 using CarParser0.DataStore;
 using CarParser0.InputReaderFolder;
 using CarParser0.Logger;
@@ -44,7 +42,7 @@ namespace CarParser0
 
         static Config LoadConfig(string[] args)
         {
-            String path = "config.xml";
+            String path = "1 Files/config.xml";
 
             if(args.Length > 0)
             {
