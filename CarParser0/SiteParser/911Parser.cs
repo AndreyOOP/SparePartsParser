@@ -17,66 +17,85 @@ namespace CarParser0.SiteParser
         private List<SiteInfo> infoList;
         private ILogger Logger;
 
+        private InternetExplorerDriver driver;
+
 
         public Auto911Parser(String ieDriverFolder, ILogger Logger)
         {
             this.ieDriverFolder = ieDriverFolder;
             this.Logger = Logger;
+
+            infoList = new List<SiteInfo>();
+            driver = new InternetExplorerDriver(ieDriverFolder);
+        }
+
+        ~Auto911Parser()
+        {
+            driver.Close();
         }
 
         public List<SiteInfo> Parse(string id)
         {
             infoList = new List<SiteInfo>();
 
-            using (var driver = new InternetExplorerDriver(ieDriverFolder))
-            {
-                try
-                {
-                    driver.Navigate().GoToUrl(url + id);
+            TrySearchId(id);
 
-                    Thread.Sleep(2000); //todo, temporary solution, just delay so site could completely loaded
-                }
-                catch (Exception ex)
-                {
-                    Logger.Log("911auto: Could not open site for id: " + id + ex.Message);
-                }
+            TryParseFirstTable(id);
 
-                String price;
-                try
-                {
-                    var node = driver.FindElementById("product_tbl");
-                    price = node.FindElement(By.CssSelector(".hl > :last-child")).Text;
-
-                    infoList.Add(new SiteInfo(id, price, "-", "911auto"));
-                }
-                catch (Exception ex)
-                {
-                    Logger.Log("911auto: Could not get price for id: " + id + ex.Message);
-                }
-
-                //todo refactor
-                try
-                {
-                    var nodeR = driver.FindElementById("zakaz_blk_svc");
-                    var elems = nodeR.FindElements(By.CssSelector("tbody > tr:not(.head)"));
-
-                    for(int i=0; i<elems.Count; i++)
-                    {
-                        var qt = elems[i].FindElement( By.CssSelector("td:nth-child(4)") ).Text;
-                        var pr = elems[i].FindElement( By.CssSelector("td:last-child") ).Text;
-
-                        infoList.Add(new SiteInfo(id, pr, qt, "911auto"));
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Log("911auto: Could not get price for id: " + id + ex.Message);
-                }
-
-                driver.Close();
-            }
-
+            TryParseSecondTable(id);
+            
             return infoList;
+        }
+
+        private void TrySearchId(String id)
+        {
+            try
+            {
+                driver.Navigate().GoToUrl(url + id);
+
+                Thread.Sleep(2000); //todo, temporary solution, just delay so site could completely loaded
+            }
+            catch (Exception ex)
+            {
+                Logger.Log("911auto: Could not open site for id: " + id + ex.Message);
+            }
+        }
+
+        private void TryParseFirstTable(String id)
+        {
+            try
+            {
+                var node  = driver.FindElementById("product_tbl");
+
+                var price = node.FindElement(By.CssSelector(".hl > :last-child")).Text;
+
+                infoList.Add(new SiteInfo(id, price, "-", "911auto"));
+            }
+            catch (Exception ex)
+            {
+                Logger.Log("911auto: Could not get price for id: " + id + ex.Message);
+            }
+        }
+
+        private void TryParseSecondTable(String id)
+        {
+            try
+            {
+                var table = driver.FindElementById("zakaz_blk_svc");
+                var rows  = table.FindElements(By.CssSelector("tbody > tr:not(.head)"));
+
+                for (int i = 0; i < rows.Count; i++)
+                {
+                    var qty   = rows[i].FindElement(By.CssSelector("td:nth-child(4)")).Text;
+                    var price = rows[i].FindElement(By.CssSelector("td:last-child")).Text;
+
+                    infoList.Add(new SiteInfo(id, price, qty, "911auto"));
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log("911auto: Could not get price for id: " + id + ex.Message);
+            }
         }
     }
 }

@@ -60,6 +60,7 @@
     <Compile Include="Config\ConfigTests.cs" />
     <Compile Include="DataStore\DataStoreFactoryTests.cs" />
     <Compile Include="DataStore\StoreToCSVTests.cs" />
+    <Compile Include="DataStore\StoreToHtmlTests.cs" />
     <Compile Include="InputProvider\InputReaderFactoryTests.cs" />
     <Compile Include="InputProvider\CSVReaderTests.cs" />
     <Compile Include="Logger\LoggerToTextFileTests.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Integration Test\MainLogicTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SiteParser\Auto911ParserTests.cs" />
+    <Compile Include="SiteParser\AutoKladTests.cs" />
     <Compile Include="SiteParser\ParserMocks\DataStoreMock.cs" />
     <Compile Include="SiteParser\ParserMocks\LogMock.cs" />
     <Compile Include="SiteParser\ParserMocks\ParserMock.cs" />
@@ -91,6 +93,8 @@
     <Content Include="Config\TestFiles\test_config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="DataStore\index.html" />
+    <Content Include="DataStore\style.css" />
     <Content Include="Integration Test\config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
