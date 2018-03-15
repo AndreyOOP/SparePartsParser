@@ -15,7 +15,7 @@ namespace CarParser0.SiteParser.Tests
 
             List<SiteInfo> actual = parser.Parse("MD619865");
 
-            Assert.AreEqual("id: MD619865; site: AutoKlad; qty: -; price: 983 грн", actual[0].ToString());
+            Assert.AreEqual("id: MD619865; site: AutoKlad; qty: -; price: 983", actual[0].ToString());
         }
     }
 }

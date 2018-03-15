@@ -22,17 +22,22 @@ namespace CarParser0.SiteParser.Tests
             Assert.AreEqual("id: MD619865; site: 911auto; qty: -; price: 835", actual[0].ToString());
         }
 
-        [TestMethod(), Ignore()]
+        /*Add blank web server project
+         * files in root of the project will be served
+         * if just run view in browser - server starts up
+         * now it is possible to work with files like they are on internet
+         */
+        [TestMethod()]
         public void ParseTestBS()
         {
             Auto911Parser parser = new Auto911Parser("SiteParser/IE Driver/", new LogMock());
 
-            SetField(parser, "url", "http://localhost:3000/");
+            SetField(parser, "url", "http://localhost:49242/");
 
 
             List<SiteInfo> actual = parser.Parse("");
 
-            Assert.AreEqual("id: MD619865; site: 911auto; qty: -; price: 822", actual[0].ToString());
+            Assert.AreEqual("id: ; site: 911auto; qty: -; price: 835", actual[0].ToString());
         }
 
         private void SetField(Object obj, String fieldName, Object fieldValue)

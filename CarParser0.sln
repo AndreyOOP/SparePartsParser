@@ -6,6 +6,31 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarParser0", "CarParser0\CarParser0.csproj", "{1D482DEF-B548-419A-974D-FB11D1E71F3F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarParser0Tests", "CarParser0Tests\CarParser0Tests.csproj", "{0DC3EE4C-EEF5-43AF-8BA8-74BE3545EB10}"
+	ProjectSection(ProjectDependencies) = postProject
+		{52C2F299-189E-48F1-8231-6E58CE9EB876} = {52C2F299-189E-48F1-8231-6E58CE9EB876}
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebServerForTest", "WebServerForTest\", "{52C2F299-189E-48F1-8231-6E58CE9EB876}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6.1"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_49242"
+		Debug.AspNetCompiler.PhysicalPath = "WebServerForTest\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49242\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_49242"
+		Release.AspNetCompiler.PhysicalPath = "WebServerForTest\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49242\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "49242"
+		SlnRelativePath = "WebServerForTest\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +46,15 @@ Global
 		{0DC3EE4C-EEF5-43AF-8BA8-74BE3545EB10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DC3EE4C-EEF5-43AF-8BA8-74BE3545EB10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DC3EE4C-EEF5-43AF-8BA8-74BE3545EB10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52C2F299-189E-48F1-8231-6E58CE9EB876}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52C2F299-189E-48F1-8231-6E58CE9EB876}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52C2F299-189E-48F1-8231-6E58CE9EB876}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{52C2F299-189E-48F1-8231-6E58CE9EB876}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9205C9BA-21ED-49FA-AD10-AF63EEF1022A}
 	EndGlobalSection
 EndGlobal
