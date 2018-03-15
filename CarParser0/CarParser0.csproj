@@ -97,6 +97,7 @@
     <Compile Include="DataStore\DataStoreFactory.cs" />
     <Compile Include="DataStore\IDataStore.cs" />
     <Compile Include="DataStore\StoreToCSV.cs" />
+    <Compile Include="DataStore\StoreToHtml.cs" />
     <Compile Include="enums\DataStoreType.cs" />
     <Compile Include="enums\LoggerType.cs" />
     <Compile Include="enums\InputType.cs" />
@@ -111,6 +112,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SiteParser\911Parser.cs" />
+    <Compile Include="SiteParser\AutoKlad.cs" />
     <Compile Include="SiteParser\IAbstractSiteParser.cs" />
     <Compile Include="SiteParser\Parser.cs" />
     <Compile Include="Logger\TimeProvider\ITimeProvider.cs" />
@@ -164,6 +166,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DataStore\index.html" />
+    <Content Include="DataStore\style.css" />
     <Content Include="ico_disk_dvd_blu.ico" />
     <Content Include="SiteParser\IE Driver\IEDriverServer.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

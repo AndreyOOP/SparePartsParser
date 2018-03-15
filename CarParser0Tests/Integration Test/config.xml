@@ -7,8 +7,8 @@
     <path>Integration Test/IT_Input.csv</path>
 	</input>
   <store>
-    <type>csv</type>
-    <path>IT_Storage.csv</path>
+    <type>html</type>
+    <path>IT_Storage.html</path>
   </store>
 </root>
 

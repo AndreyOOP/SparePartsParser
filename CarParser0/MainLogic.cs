@@ -68,7 +68,10 @@ namespace CarParser0
             Reader = InputProviderFactory.CreateInputReader(config);
             Logger.Log("Reader of type " + Reader.GetType().Name + " initialized");
 
-            Parsers = new List<IAbstractSiteParser>() { new Auto911Parser("SiteParser/IE Driver/", Logger) };
+            Parsers = new List<IAbstractSiteParser>() {
+                new Auto911Parser("SiteParser/IE Driver/", Logger),
+                new AutoKlad("SiteParser/IE Driver/", Logger)
+            };
             Logger.Log("Site parsers initialized");
 
             Store = DataStoreFactory.CreateDataStore(config, Logger);
