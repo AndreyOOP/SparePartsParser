@@ -1,6 +1,7 @@
 ﻿using CarParser0.ConfigNS;
 using CarParser0.DataStore;
 using CarParser0.InputReaderFolder;
+using CarParser0.Interfaces;
 using CarParser0.Logger;
 using CarParser0.SiteParser;
 using System;
@@ -36,6 +37,7 @@ namespace CarParser0
             }
 
             #if DEBUG == false
+                Console.WriteLine("Press any key to exit");
                 Console.ReadKey();
             #endif
         }
@@ -62,7 +64,7 @@ namespace CarParser0
 
         static void Initialization(Config config)
         {
-            Logger = new LoggerToTextFile(config.LogPath, new TimeProvider());
+            Logger = new Logger.Logger(config.LogPath, new TimeProvider());
             Logger.Log("Logger initialized");
 
             Reader = InputProviderFactory.CreateInputReader(config);
