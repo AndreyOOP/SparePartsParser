@@ -58,6 +58,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Tests\Parser\AutoKladServiceTest.cs" />
     <Compile Include="Tests\Parser\ParseServiceTests.cs" />
     <Compile Include="Tests\Config.cs" />
     <Compile Include="Tests\DataStore\DataStoreFactory.cs" />

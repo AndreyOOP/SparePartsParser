@@ -1,0 +1,86 @@
+/**
+ * @author Alex Belogura
+ * @author Yuriy Korzun
+ */
+var CatalogChanger=function (data) {
+};
+
+CatalogChanger.prototype.Change = function(sSection)
+{
+	document.getElementById('description_span').style.display = 'none';
+	document.getElementById('analog_span').style.display = 'none';
+	/* document.getElementById('use_in_auto_span').style.display = 'none'; */
+	document.getElementById('number_oe_span').style.display = 'none';
+	
+	document.getElementById('description_link').className = 'unselected';
+	document.getElementById('analog_link').className = 'unselected';
+	/* document.getElementById('use_in_auto_link').className = 'unselected'; */
+	document.getElementById('number_oe_link').className = 'unselected';
+	
+	document.getElementById('description_li').className = '';
+	document.getElementById('analog_li').className = '';
+	/* document.getElementById('use_in_auto_li').className = ''; */
+	document.getElementById('number_oe_li').className = '';
+	
+	if (sSection=='description') {
+		document.getElementById('description_span').style.display = 'block';
+		document.getElementById('description_link').className = 'selected';
+		document.getElementById('description_li').className = 'selected';
+	} else if (sSection=='analog') {
+		document.getElementById('analog_span').style.display = 'block';
+		document.getElementById('analog_link').className = 'selected';
+		document.getElementById('analog_li').className = 'selected';
+	} /* else if (sSection=='use_in_auto') {
+		document.getElementById('use_in_auto_span').style.display = 'block';
+		document.getElementById('use_in_auto_link').className = 'selected';
+		document.getElementById('use_in_auto_li').className = 'selected';
+	} */ else if (sSection=='number_oe') {
+		document.getElementById('number_oe_span').style.display = 'block';
+		document.getElementById('number_oe_link').className = 'selected';
+		document.getElementById('number_oe_li').className = 'selected';
+	}
+}
+
+CatalogChanger.prototype.Change2 = function(sSection)
+{
+	var tab={0:'description',1:'use_in_auto',2:'number_oe',3:'review',4:'delivery'};
+	for (var key in tab) {
+	    var val = tab [key];
+	    if(sSection==val){
+		    document.getElementById(val+'_span').style.display = 'inline';
+		    document.getElementById(val+'_link').className = 'selected';
+		    document.getElementById(val+'_li').className = 'selected';
+	    }else{
+		    document.getElementById(val+'_span').style.display = 'none';
+		    document.getElementById(val+'_link').className = 'unselected';
+		    document.getElementById(val+'_li').className = '';
+	    }
+		if(sSection=='review'){
+			document.getElementById('id_review_bottom').style.display = 'none';
+		}else{
+			document.getElementById('id_review_bottom').style.display = 'block';
+		}
+	}
+}
+var oCatalogChanger=new CatalogChanger();
+
+var WiperChanger=function (data) {
+};
+
+WiperChanger.prototype.Change2 = function(sSection)
+{
+	var tab={/*0:'komplekt',*/1:'driver',2:'pesenger'};
+	for (var key in tab) {
+	    var val = tab [key];
+	    if(sSection==val){
+		    document.getElementById(val+'_span').style.display = 'block';
+		    document.getElementById(val+'_link').className = 'selected';
+		    document.getElementById(val+'_li').className = 'selected';
+	    }else{
+		    document.getElementById(val+'_span').style.display = 'none';
+		    document.getElementById(val+'_link').className = 'unselected';
+		    document.getElementById(val+'_li').className = '';
+	    }
+	}
+}
+var oWiperChanger=new WiperChanger();

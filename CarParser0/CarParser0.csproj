@@ -106,6 +106,7 @@
     <Compile Include="Interfaces\IInputProvider.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Parser\ParseService.cs" />
+    <Compile Include="Parser\SiteParsers\AutoKladService.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
