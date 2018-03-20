@@ -1,13 +1,13 @@
 ﻿using CarParser0.ConfigF.enums;
 using CarParser0.ConfigNS;
-using CarParser0.Logger;
+using CarParser0.Interfaces;
 using System;
 
 namespace CarParser0.DataStore
 {
     public class DataStoreFactory
     {
-        public static IDataStore CreateDataStore(Config config, ILogger Logger)
+        public static IDataStore CreateDataStore(Configuration config, ILogger Logger)
         {
             IDataStore DataStore;
 

@@ -47,6 +47,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
+    <Reference Include="WebDriver, Version=3.10.0.0, Culture=neutral, PublicKeyToken=null" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -57,49 +58,50 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Config\ConfigTests.cs" />
-    <Compile Include="DataStore\DataStoreFactoryTests.cs" />
-    <Compile Include="DataStore\StoreToCSVTests.cs" />
-    <Compile Include="DataStore\StoreToHtmlTests.cs" />
-    <Compile Include="InputProvider\InputReaderFactoryTests.cs" />
-    <Compile Include="InputProvider\CSVReaderTests.cs" />
-    <Compile Include="Logger\LoggerToTextFileTests.cs" />
-    <Compile Include="Logger\TestTimer.cs" />
-    <Compile Include="Integration Test\MainLogicTests.cs" />
+    <Compile Include="Tests\Config.cs" />
+    <Compile Include="Tests\DataStore\DataStoreFactory.cs" />
+    <Compile Include="Tests\DataStore\StoreToCSVTests.cs" />
+    <Compile Include="Tests\DataStore\StoreToHtmlTests.cs" />
+    <Compile Include="Tests\InputProvider\InputReaderFactory.cs" />
+    <Compile Include="Tests\InputProvider\CSVReader.cs" />
+    <Compile Include="Tests\Logger.cs" />
+    <Compile Include="Mocks\TimeProviderMock.cs" />
+    <Compile Include="Tests\Integration Test\MainLogicTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SiteParser\Auto911ParserTests.cs" />
-    <Compile Include="SiteParser\AutoKladTests.cs" />
-    <Compile Include="SiteParser\ParserMocks\DataStoreMock.cs" />
-    <Compile Include="SiteParser\ParserMocks\LogMock.cs" />
-    <Compile Include="SiteParser\ParserMocks\ParserMock.cs" />
-    <Compile Include="SiteParser\ParserTests.cs" />
+    <Compile Include="Tests\Parser\Auto911Parser.cs" />
+    <Compile Include="Tests\Parser\AutoKlad.cs" />
+    <Compile Include="Mocks\DataStoreMock.cs" />
+    <Compile Include="Mocks\LoggerMock.cs" />
+    <Compile Include="Mocks\SiteParserMock.cs" />
+    <Compile Include="Tests\Parser\Parser.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="InputProvider\in.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Include="TestFiles\InputProvider\in.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Integration Test\IT_Input.csv">
+    <None Include="TestFiles\Integration Test\IT_Input.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="TestFiles\DataStore\store.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config\TestFiles\err_config.xml">
+    <Content Include="TestFiles\Config\err_config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Config\TestFiles\err_type_config.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Config\TestFiles\test_config.xml">
+    <Content Include="TestFiles\Config\err_type_config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="DataStore\index.html" />
-    <Content Include="DataStore\style.css" />
-    <Content Include="Integration Test\config.xml">
+    <Content Include="TestFiles\Config\test_config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SiteParser\IE Driver\IEDriverServer.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="TestFiles\Integration Test\config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\Logger\test_log.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -108,6 +110,7 @@
       <Name>CarParser0</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

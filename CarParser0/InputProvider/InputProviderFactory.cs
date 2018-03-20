@@ -6,7 +6,7 @@ namespace CarParser0.InputReaderFolder
 {
     public class InputProviderFactory
     {
-        public static IInputProvider CreateInputReader(Config config)
+        public static IInputProvider CreateInputReader(Configuration config)
         {
             switch (config.ReaderType)
             {

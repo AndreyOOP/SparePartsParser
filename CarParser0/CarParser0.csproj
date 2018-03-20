@@ -15,7 +15,7 @@
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
-    <PublishUrl>C:\Users\Anik\Desktop\test\</PublishUrl>
+    <PublishUrl>C:\Users\Anik\Desktop\test2\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -66,7 +66,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>ico_disk_dvd_blu.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\ico_disk_dvd_blu.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>CarParser0.MainLogic</StartupObject>
@@ -93,31 +93,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\Config.cs" />
+    <Compile Include="Config.cs" />
     <Compile Include="DataStore\DataStoreFactory.cs" />
-    <Compile Include="DataStore\IDataStore.cs" />
-    <Compile Include="DataStore\StoreToCSV.cs" />
-    <Compile Include="DataStore\StoreToHtml.cs" />
-    <Compile Include="enums\DataStoreType.cs" />
-    <Compile Include="enums\LoggerType.cs" />
-    <Compile Include="enums\InputType.cs" />
-    <Compile Include="DTO\SiteInfo.cs" />
-    <Compile Include="InputProvider\CSVReader.cs" />
+    <Compile Include="Interfaces\IDataStore.cs" />
+    <Compile Include="DataStore\Implementation\StoreToCSV.cs" />
+    <Compile Include="DataStore\Implementation\StoreToHtml.cs" />
+    <Compile Include="Enums\DataStoreType.cs" />
+    <Compile Include="Enums\InputType.cs" />
+    <Compile Include="Dtos\SiteInfo.cs" />
+    <Compile Include="InputProvider\Implementation\CSVReader.cs" />
     <Compile Include="InputProvider\InputProviderFactory.cs" />
-    <Compile Include="InputProvider\IInputProvider.cs" />
-    <Compile Include="Logger\ILogger.cs" />
+    <Compile Include="Interfaces\IInputProvider.cs" />
+    <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SiteParser\911Parser.cs" />
-    <Compile Include="SiteParser\AutoKlad.cs" />
-    <Compile Include="SiteParser\IAbstractSiteParser.cs" />
-    <Compile Include="SiteParser\Parser.cs" />
-    <Compile Include="Logger\TimeProvider\ITimeProvider.cs" />
-    <Compile Include="Logger\LoggerToTextFile.cs" />
-    <Compile Include="Logger\TimeProvider\TimeProvider.cs" />
+    <Compile Include="Parser\SiteParsers\911Parser.cs" />
+    <Compile Include="Parser\SiteParsers\AutoKlad.cs" />
+    <Compile Include="Interfaces\IAbstractSiteParser.cs" />
+    <Compile Include="Parser\Parser.cs" />
+    <Compile Include="Interfaces\ITimeProvider.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="TimeProvider.cs" />
     <Compile Include="MainLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -166,10 +165,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataStore\index.html" />
-    <Content Include="DataStore\style.css" />
-    <Content Include="ico_disk_dvd_blu.ico" />
-    <Content Include="SiteParser\IE Driver\IEDriverServer.exe">
+    <Content Include="Resources\ico_disk_dvd_blu.ico" />
+    <Content Include="Resources\IEDriverServer.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
