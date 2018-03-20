@@ -25,15 +25,20 @@ namespace CarParser0.InputReaderFolder.Tests
     [TestClass()]
     public class InputReaderFactoryTests
     {
+        Configuration Config;
+
+        [TestInitialize()]
+        public void Setup()
+        {
+            Config = new Configuration();
+        }
+
         [TestMethod()]
         public void CreateInputReaderCSVTest()
         {
-            Config config = new Config();
+            Config.ReaderType = InputType.CSV;
 
-            SetProperty(config, "ReaderType", InputType.CSV);
-
-
-            var CSVReader = InputProviderFactory.CreateInputReader(config); //or use just what have t be used ? path & type but what to do with database ?
+            var CSVReader = InputProviderFactory.CreateInputReader(Config); //or use just what have t be used ? path & type but what to do with database ?
 
             Assert.AreEqual(typeof(CSVReader), CSVReader.GetType());
         }
@@ -41,45 +46,32 @@ namespace CarParser0.InputReaderFolder.Tests
         [TestMethod()]
         public void CreateInputReaderExcelTest()
         {
-            Config config = new Config();
+            Config.ReaderType = InputType.EXCEL;
 
-            SetProperty(config, "ReaderType", InputType.EXCEL);
-
-            Assert.ThrowsException<NotImplementedException>(() => InputProviderFactory.CreateInputReader(config));
+            Assert.ThrowsException<NotImplementedException>(() => InputProviderFactory.CreateInputReader(Config));
         }
 
         [TestMethod()]
         public void CreateInputReaderSQLTest()
         {
-            Config config = new Config();
+            Config.ReaderType = InputType.SQL;
 
-            SetProperty(config, "ReaderType", InputType.SQL);
-
-            Assert.ThrowsException<NotImplementedException>(() => InputProviderFactory.CreateInputReader(config));
+            Assert.ThrowsException<NotImplementedException>(() => InputProviderFactory.CreateInputReader(Config));
         }
 
         [TestMethod()]
         public void CreateInputReaderErrorTypeTest()
         {
-            Config config = new Config();
-
-            SetProperty(config, "ReaderType", -1);
+            Config.ReaderType = (InputType)(-1);
 
             try
             {
-                InputProviderFactory.CreateInputReader(config);
+                InputProviderFactory.CreateInputReader(Config);
             }
             catch (Exception ex)
             {
                 Assert.AreEqual("Could not find appropriative type to instantiate", ex.Message);
             }
-        }
-
-        private void SetProperty(Object obj, String propertyName, Object propertyValue)
-        {
-            PropertyInfo Property = obj.GetType().GetProperty(propertyName);
-
-            Property.SetValue(obj, propertyValue);
         }
     }
 }

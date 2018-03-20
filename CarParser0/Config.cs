@@ -1,22 +1,22 @@
 ﻿using CarParser0.ConfigF;
 using CarParser0.ConfigF.enums;
+using CarParser0.Interfaces;
 using System;
 using System.IO;
 using System.Xml;
 
 namespace CarParser0.ConfigNS
 {
-    public class Config
+    public class Configuration
     {
-        public String     LogPath { get; private set; }
+        public String        LogPath    { get; set; }
+        public String        ReaderPath { get; set; }
+        public InputType     ReaderType { get; set; }
+        public String        StorePath  { get; set; }
+        public DataStoreType StoreType  { get; set; }
 
-        public String    ReaderPath { get; private set; }
-        public InputType ReaderType { get; private set; }
 
-        public String StorePath { get; private set; }
-        public DataStoreType StoreType { get; private set; }
-
-        public Config Load(String path)
+        public Configuration Load(String path) //looks ugly... for instance have to call method with path
         {
             if (!File.Exists(path))
                 throw new FileNotFoundException("Config file not found");

@@ -16,22 +16,29 @@ namespace CarParser0.ConfigNS.Tests
     [TestClass()]
     public class ConfigTests
     {
+        Configuration Config;
         String folder = "TestFiles/Config/";
+
+        [TestInitialize]
+        public void Setup()
+        {
+            Config = new Configuration();
+        }
 
         [TestMethod()]
         public void ConfigTest()
         {
             String path = folder + "test_config.xml";
 
-            Config config = new Config().Load(path);
+            Config = Config.Load(path);
 
 
-            Assert.AreEqual("logger path"     , config.LogPath);
-            Assert.AreEqual("data reader path", config.ReaderPath);
-            Assert.AreEqual("data store path" , config.StorePath);
+            Assert.AreEqual("logger path"     , Config.LogPath);
+            Assert.AreEqual("data reader path", Config.ReaderPath);
+            Assert.AreEqual("data store path" , Config.StorePath);
 
-            Assert.AreEqual(InputType.EXCEL  , config.ReaderType);
-            Assert.AreEqual(DataStoreType.CSV, config.StoreType);
+            Assert.AreEqual(InputType.EXCEL  , Config.ReaderType);
+            Assert.AreEqual(DataStoreType.CSV, Config.StoreType);
         }
 
         [TestMethod()]
@@ -39,7 +46,7 @@ namespace CarParser0.ConfigNS.Tests
         {
             String path = "not_existing_file.xml";
 
-            Assert.ThrowsException<FileNotFoundException>( () => new Config().Load(path) );
+            Assert.ThrowsException<FileNotFoundException>( () => Config.Load(path) );
         }
 
         [TestMethod()]
@@ -47,7 +54,7 @@ namespace CarParser0.ConfigNS.Tests
         {
             String path = folder + "err_config.xml";
 
-            Assert.ThrowsException<XmlException>( () => new Config().Load(path) );
+            Assert.ThrowsException<XmlException>( () => Config.Load(path) );
         }
     }
 }

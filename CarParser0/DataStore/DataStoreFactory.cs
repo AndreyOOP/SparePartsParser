@@ -7,7 +7,7 @@ namespace CarParser0.DataStore
 {
     public class DataStoreFactory
     {
-        public static IDataStore CreateDataStore(Config config, ILogger Logger)
+        public static IDataStore CreateDataStore(Configuration config, ILogger Logger)
         {
             IDataStore DataStore;
 

@@ -10,15 +10,21 @@ namespace CarParser0.DataStore.Tests
     [TestClass()]
     public class DataStoreFactoryTests
     {
+        Configuration Config;
+
+        [TestInitialize()]
+        public void Setup()
+        {
+            Config = new Configuration();
+        }
+
         [TestMethod()]
         public void CreateCSVDataStoreTest()
         {
-            var config = new Config();
+            Config.StorePath = "TestFiles/DataStore/factory-storage.csv";
+            Config.StoreType = DataStoreType.CSV;
 
-            SetProperty(config, "StorePath", "storage.csv");
-            SetProperty(config, "StoreType", DataStoreType.CSV);
-
-            var DataStore = DataStoreFactory.CreateDataStore(config, new LoggerMock());
+            var DataStore = DataStoreFactory.CreateDataStore(Config, new LoggerMock());
 
             Assert.AreEqual(typeof(StoreToCSV), DataStore.GetType());
         }
@@ -26,12 +32,10 @@ namespace CarParser0.DataStore.Tests
         [TestMethod()]
         public void CreateHTMLDataStoreTest()
         {
-            var config = new Config();
+            Config.StorePath = "TestFiles/DataStore/factory-storage.html";
+            Config.StoreType = DataStoreType.HTML;
 
-            SetProperty(config, "StorePath", "storage.html");
-            SetProperty(config, "StoreType", DataStoreType.HTML);
-
-            var DataStore = DataStoreFactory.CreateDataStore(config, new LoggerMock());
+            var DataStore = DataStoreFactory.CreateDataStore(Config, new LoggerMock());
 
             Assert.AreEqual(typeof(StoreToHtml), DataStore.GetType());
         }
@@ -40,16 +44,15 @@ namespace CarParser0.DataStore.Tests
         public void CreateDataStoreNotImplementedTypeTest()
         {
             var Logger = new LoggerMock();
-            var Conf = new Config();
 
             DataStoreType[] types = new DataStoreType[] { DataStoreType.EXCEL, DataStoreType.SQL };
 
-            foreach(DataStoreType type in types)
+            foreach (DataStoreType type in types)
             {
-                SetProperty(Conf, "StoreType", type);
+                Config.StoreType = type;
 
                 Assert.ThrowsException<NotImplementedException>(
-                        () => DataStoreFactory.CreateDataStore(Conf, Logger)
+                        () => DataStoreFactory.CreateDataStore(Config, Logger)
                     );
             }
         }
@@ -57,26 +60,16 @@ namespace CarParser0.DataStore.Tests
         [TestMethod()]
         public void CreateDataStoreIncorrectTypeTest()
         {
-            var config = new Config();
-
-            SetProperty(config, "StoreType", -1); //"unnknown type"
+            Config.StoreType = (DataStoreType)(-1);
 
             try
             {
-                DataStoreFactory.CreateDataStore(config, new LoggerMock());
+                DataStoreFactory.CreateDataStore(Config, new LoggerMock());
             }
             catch (Exception ex)
             {
                 Assert.AreEqual("Unknown Data store type -1", ex.Message);
             }
-        }
-
-
-        private void SetProperty(Object obj, String propertyName, Object propertyValue)
-        {
-            PropertyInfo Property = obj.GetType().GetProperty(propertyName);
-
-            Property.SetValue(obj, propertyValue);
         }
     }
 }

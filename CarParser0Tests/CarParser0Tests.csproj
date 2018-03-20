@@ -47,6 +47,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
+    <Reference Include="WebDriver, Version=3.10.0.0, Culture=neutral, PublicKeyToken=null" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -109,9 +110,7 @@
       <Name>CarParser0</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SiteParser\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

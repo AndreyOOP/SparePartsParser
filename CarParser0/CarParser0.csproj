@@ -93,16 +93,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Config.cs" />
-    <Compile Include="Classes\DataStore\DataStoreFactory.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="DataStore\DataStoreFactory.cs" />
     <Compile Include="Interfaces\IDataStore.cs" />
-    <Compile Include="Classes\DataStore\Implementation\StoreToCSV.cs" />
-    <Compile Include="Classes\DataStore\Implementation\StoreToHtml.cs" />
+    <Compile Include="DataStore\Implementation\StoreToCSV.cs" />
+    <Compile Include="DataStore\Implementation\StoreToHtml.cs" />
     <Compile Include="Enums\DataStoreType.cs" />
     <Compile Include="Enums\InputType.cs" />
     <Compile Include="Dtos\SiteInfo.cs" />
-    <Compile Include="Classes\InputProvider\Implementation\CSVReader.cs" />
-    <Compile Include="Classes\InputProvider\InputProviderFactory.cs" />
+    <Compile Include="InputProvider\Implementation\CSVReader.cs" />
+    <Compile Include="InputProvider\InputProviderFactory.cs" />
     <Compile Include="Interfaces\IInputProvider.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -110,13 +110,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Parser\SiteParsers\911Parser.cs" />
-    <Compile Include="Classes\Parser\SiteParsers\AutoKlad.cs" />
+    <Compile Include="Parser\SiteParsers\911Parser.cs" />
+    <Compile Include="Parser\SiteParsers\AutoKlad.cs" />
     <Compile Include="Interfaces\IAbstractSiteParser.cs" />
-    <Compile Include="Classes\Parser\Parser.cs" />
+    <Compile Include="Parser\Parser.cs" />
     <Compile Include="Interfaces\ITimeProvider.cs" />
-    <Compile Include="Classes\Logger.cs" />
-    <Compile Include="Classes\TimeProvider.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="TimeProvider.cs" />
     <Compile Include="MainLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
