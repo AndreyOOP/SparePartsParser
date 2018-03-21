@@ -58,6 +58,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Tests\Parser\SiteParsers\AutoKladServiceTest.cs" />
+    <Compile Include="Tests\Parser\ParseServiceTests.cs" />
     <Compile Include="Tests\Config.cs" />
     <Compile Include="Tests\DataStore\DataStoreFactory.cs" />
     <Compile Include="Tests\DataStore\StoreToCSVTests.cs" />
@@ -68,8 +70,8 @@
     <Compile Include="Mocks\TimeProviderMock.cs" />
     <Compile Include="Tests\Integration Test\MainLogicTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\Parser\Auto911Parser.cs" />
-    <Compile Include="Tests\Parser\AutoKlad.cs" />
+    <Compile Include="Tests\Parser\SiteParsers\Auto911Parser.cs" />
+    <Compile Include="Tests\Parser\SiteParsers\AutoKlad.cs" />
     <Compile Include="Mocks\DataStoreMock.cs" />
     <Compile Include="Mocks\LoggerMock.cs" />
     <Compile Include="Mocks\SiteParserMock.cs" />
