@@ -8,7 +8,7 @@ using OpenQA.Selenium;
 
 namespace CarParser0.SiteParser.Tests
 {
-    [TestClass, Ignore]
+    [TestClass]
     public class ParseServiceTests
     {
         InternetExplorerDriver Driver;

@@ -7,7 +7,7 @@ using OpenQA.Selenium.IE;
 namespace CarParser0Tests.Tests.Parser
 {
     [TestClass()]
-    public class AutoKladServiceTest
+    public class AutoKladTest
     {
         InternetExplorerDriver Driver;
         ParseService Service;
@@ -24,7 +24,7 @@ namespace CarParser0Tests.Tests.Parser
         [TestMethod()]
         public void AutoKladServiceParse()
         {
-            var siteParser = new AutoKladService(Service, "http://localhost:49242/AutoKlad/", Logger);
+            var siteParser = new AutoKlad(Service, "http://localhost:49242/AutoKlad/", Logger);
 
             var siteInfo = siteParser.Parse("MD619865.htm");
 
@@ -37,7 +37,7 @@ namespace CarParser0Tests.Tests.Parser
         [TestMethod()]
         public void AutoKladServiceNotFound()
         {
-            var siteParser = new AutoKladService(Service, "http://localhost:49242/AutoKlad/", Logger);
+            var siteParser = new AutoKlad(Service, "http://localhost:49242/AutoKlad/", Logger);
 
             var siteInfo = siteParser.Parse("zzz");
 
