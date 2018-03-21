@@ -106,14 +106,13 @@
     <Compile Include="Interfaces\IInputProvider.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Services\ParseService.cs" />
-    <Compile Include="Parser\SiteParsers\AutoKladService.cs" />
+    <Compile Include="Parser\SiteParsers\AutoKlad.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Parser\SiteParsers\911Parser.cs" />
-    <Compile Include="Parser\SiteParsers\AutoKlad.cs" />
     <Compile Include="Interfaces\IAbstractSiteParser.cs" />
     <Compile Include="Parser\Parser.cs" />
     <Compile Include="Interfaces\ITimeProvider.cs" />

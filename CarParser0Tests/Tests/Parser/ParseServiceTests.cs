@@ -8,7 +8,7 @@ using OpenQA.Selenium;
 
 namespace CarParser0.SiteParser.Tests
 {
-    [TestClass, Ignore]
+    [TestClass]
     public class ParseServiceTests
     {
         InternetExplorerDriver Driver;
@@ -82,6 +82,20 @@ namespace CarParser0.SiteParser.Tests
 
             Assert.AreEqual(0, elements.Count);
             Assert.IsNull(Logger.Message);
+        }
+
+        [TestMethod]
+        public void GetElementsFromIWebElementTest()
+        {
+            Service.NavigateToSite("http://localhost:49242/ParseService/NavigatetoUrl/MD619865.htm");
+
+            var element = Driver.FindElementById("central-column");
+
+            var prices = Service.GetElements(element, ".search_price");
+
+
+            Assert.AreEqual("998 грн" , prices[0].Text);
+            Assert.AreEqual("1816 грн", prices[1].Text);
         }
 
         [TestCleanup]
