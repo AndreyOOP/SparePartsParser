@@ -1,86 +1,54 @@
 ﻿using CarParser0.DTO;
 using CarParser0.Interfaces;
 using CarParser0.SiteParser;
-using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace CarParser0.ParserNS.SiteParsers
 {
     public class AutoKladService : IAbstractSiteParser
     {
-        static ParseService Service;
+        ParseService Service;
         String Url;
-        static ILogger Logger;
+        ILogger Logger;
 
         public AutoKladService(ParseService Service, String Url, ILogger Logger)
         {
-            AutoKladService.Service = Service;
-            this.Url = Url;
-            AutoKladService.Logger = Logger;
+            this.Service = Service;
+            this.Url     = Url;
+            this.Logger  = Logger;
         }
 
         public List<SiteInfo> Parse(string item)
         {
+            List<String> links = new List<String>();
             List<SiteInfo> parsed = new List<SiteInfo>();
 
             try
             {
-                //Service.NavigateToSite(Url + item, IsLoad, OnError);
+                Service.NavigateToSite(Url + item);
 
-                //var elems = Service.GetElements("#central-column .search_element a", OnError);
+                foreach (var linkElem in Service.GetElements("#central-column .search_element a", item))
+                {
+                    links.Add(linkElem.GetAttribute("href"));
+                }
 
-                ////foreach (var el in elems)
-                ////{
-                ////    var ln = el.GetAttribute("href");
+                foreach (var link in links)
+                {
+                    Service.NavigateToSite(link);
 
-                ////    Service.NavigateToSite(ln, IsLoad, OnError);
-
-                ////    //...
-                ////}
-
-                //foreach (var link in ToList(elems))
-                //{
-                //    Service.NavigateToSite(link, IsLoad, OnError);
-
-                //    var pr = Service.GetElements("#product-top-left .plitka_price b", OnError);
-
-                //    foreach(var p in pr)
-                //    {
-                //        parsed.Add(new SiteInfo(item, p.Text, "-", "AutoKlad"));
-                //    }
-                //}
+                    foreach(var elem in Service.GetElements("#product-top-left .plitka_price b", item))
+                    {
+                        parsed.Add(new SiteInfo(item, elem.Text, "-", "AutoKlad"));
+                    }
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Logger.Log(item + " - unexpected exception. " + ex.Message);
             }
 
             return parsed;
-        }
-
-
-        private Func<Boolean> IsLoad = () =>
-        {
-            return Service.GetElements("#ak_rev") != null;
-        };
-
-        private Action<String> OnError = (str) =>
-        {
-            Logger.Log("Error: " + str);
-            throw new Exception();
-        };
-
-        private List<String> ToList(IReadOnlyCollection<IWebElement> Elems)
-        {
-            List<String> Converted = new List<String>();
-
-            foreach (var webEl in Elems)
-            {
-                Converted.Add(webEl.GetAttribute("href"));
-            }
-
-            return Converted;
         }
     }
 }

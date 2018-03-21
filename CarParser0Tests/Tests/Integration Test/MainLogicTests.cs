@@ -4,7 +4,7 @@ using System.IO;
 
 namespace CarParser0.Tests
 {
-    [TestClass()]
+    [TestClass(), Ignore]
     public class MainLogicTests //TODO 
     {
         [TestInitialize()]
