@@ -40,34 +40,21 @@ namespace CarParser0.ParserNS
 
             return elements;
         }
+
+        public List<IWebElement> GetElements(IWebElement Source, String cssSelector, String id = "", Boolean handleNotFound = true)
+        {
+            var elements = Source.FindElements(By.CssSelector(cssSelector));
+
+            if (handleNotFound && elements.Count == 0)
+            {
+                OnNotFound(cssSelector, id);
+            }
+
+            List<IWebElement> list = new List<IWebElement>();
+
+            list.AddRange(elements);
+
+            return list;
+        }
     }
 }
-
-//public List<T> GetElements<T>(String cssSelector, Boolean handleError = true)
-//{
-//    IReadOnlyCollection<T> elements = (IReadOnlyCollection<T>)Driver.FindElementsByCssSelector(cssSelector);
-
-//    if (handleError && elements.Count == 0)
-//    {
-//        OnError();
-//    }
-
-//    List<T> result = new List<T>();
-
-//    result.AddRange(elements);
-
-//    return result;
-//}
-
-
-//public void NavigateToSite(String url, Func<Boolean> isLoaded, Action<String> IsNotLoaded)
-//{
-//    Driver.Navigate().GoToUrl(url);
-
-//    if(!isLoaded())
-//    {
-//        IsNotLoaded(url);
-
-//        //throw new Exception();
-//    }
-//}

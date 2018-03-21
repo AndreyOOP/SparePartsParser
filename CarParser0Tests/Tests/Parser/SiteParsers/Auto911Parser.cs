@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using CarParser0.DTO;
 using CarParser0Tests.SiteParser.ParserMocks;
 using System;
-using System.IO;
 using OpenQA.Selenium.IE;
 using CarParser0.ParserNS;
 
@@ -27,16 +26,23 @@ namespace CarParser0.SiteParser.Tests
         [TestMethod]
         public void ParseTest()
         {
+            List<String> expected = new List<String>() {
+                "id: MD619865; site: 911auto; qty: -; price: 835",
+                "id: MD619865; site: 911auto; qty: 59; price: 805",
+                "id: MD619865; site: 911auto; qty: 100; price: 957",
+                "id: MD619865; site: 911auto; qty: 100; price: 1168",
+                "id: MD619865; site: 911auto; qty: 100; price: 1168"
+            };
+
             Auto911Parser Parser = new Auto911Parser(Service, "http://localhost:49242/911", Logger);
 
             List<SiteInfo> actual = Parser.Parse("MD619865");
 
 
-            Assert.AreEqual("id: MD619865; site: 911auto; qty: -; price: 835"   , actual[0].ToString());
-            Assert.AreEqual("id: MD619865; site: 911auto; qty: 59; price: 805"  , actual[1].ToString());
-            Assert.AreEqual("id: MD619865; site: 911auto; qty: 100; price: 957" , actual[2].ToString());
-            Assert.AreEqual("id: MD619865; site: 911auto; qty: 100; price: 1168", actual[3].ToString());
-            Assert.AreEqual("id: MD619865; site: 911auto; qty: 100; price: 1168", actual[4].ToString());
+            for(int i=0; i<5; i++)
+            {
+                Assert.AreEqual(expected[i], actual[i].ToString());
+            }
         }
 
         [TestMethod]

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using CarParser0.DTO;
-using OpenQA.Selenium;
 using CarParser0.Interfaces;
 using CarParser0.ParserNS;
 
@@ -35,10 +34,10 @@ namespace CarParser0.SiteParser
 
                 foreach(var el in Service.GetElements("#zakaz_blk_svc tbody > tr:not(.head)", id, false))
                 {
-                    var qty   = el.FindElement(By.CssSelector("td:nth-child(4)")).Text; //todo rewrite with service
-                    var price = el.FindElement(By.CssSelector("td:last-child")).Text;
+                    var qty   = Service.GetElements(el, "td:nth-child(4)", id);
+                    var price = Service.GetElements(el, "td:last-child", id);
 
-                    parsed.Add(new SiteInfo(id, price, qty, "911auto"));
+                    parsed.Add(new SiteInfo(id, price[0].Text, qty[0].Text, "911auto"));
                 }
             }
             catch (Exception ex)

@@ -84,6 +84,20 @@ namespace CarParser0.SiteParser.Tests
             Assert.IsNull(Logger.Message);
         }
 
+        [TestMethod]
+        public void GetElementsFromIWebElementTest()
+        {
+            Service.NavigateToSite("http://localhost:49242/ParseService/NavigatetoUrl/MD619865.htm");
+
+            var element = Driver.FindElementById("central-column");
+
+            var prices = Service.GetElements(element, ".search_price");
+
+
+            Assert.AreEqual("998 грн" , prices[0].Text);
+            Assert.AreEqual("1816 грн", prices[1].Text);
+        }
+
         [TestCleanup]
         public void CleanUp()
         {
