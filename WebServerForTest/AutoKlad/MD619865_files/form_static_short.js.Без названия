@@ -1,0 +1,94 @@
+function CloseCF() {
+	$('#opaco').hide();
+	$('#div_contact_form').fadeOut(500);
+	return false;
+};
+function ShowCF(){
+	$('#opaco').height($(document).height());
+	$('#opaco').show();
+	$('#opaco').fadeTo(100, 0.6);
+	$('#div_contact_form').fadeIn(500);
+	return false;
+};
+function CloseRF() {
+	$('.js-popup-rf').fadeOut(500);
+	/*
+	$('#opaco').hide();
+	$('#div_report_form').fadeOut(500);
+	*/
+	return false;
+};
+function ShowRF(){
+	$('.js-popup-rf').fadeIn(500);
+	/*
+	$('#opaco').height($(document).height());
+	$('#opaco').show();
+	$('#opaco').fadeTo(100, 0.6);
+	$('#div_report_form').fadeIn(500);
+	*/
+	return false;
+};
+	$('.js-popup-rf .close').click(function(){
+		$('.js-popup-rf').fadeOut(500);
+	});
+	$('.js-popup-rf .popup-bg').click(function(){
+		$('.js-popup-rf').fadeOut(500);
+	});
+
+$("#contact_form").submit(function() {
+	if (($("#contact_name").val().length > 1)&&($("#contact_email").val().length > 5)&&($("#g-recaptcha-response-4").val().length > 0)) {
+		$("#contact_result").text("Sending...").show().fadeOut(2000);
+		var elems = document.contact_form.getElementsByTagName('*');
+		var data_post = "test=1";
+		for (var i = 0; i < elems.length; i++){if (elems[i].name) data_post=data_post+'&'+elems[i].name+'='+encodeURI(elems[i].value)};
+		try{
+		$.ajax({
+			type: "POST",
+			url: "/?action=contact_form_short",
+			data: data_post,
+			success:function(response){
+				CloseCF();
+				alert(response);
+			},
+			error: function (request, status, error) {
+				CloseCF();
+				alert(request.responseText);
+			} 
+		});
+		reloadsecret('contact_capcha_img');
+		}catch(err){
+			alert("Error: "+err.message);
+		}
+	}else{
+		$("#contact_result").text("Not valid!").show().fadeOut(2000);
+	}
+	return false;
+});
+$("#report_form").submit(function() {
+	if (($("#report_desc").val().length > 5)&&($("#g-recaptcha-response-1").val().length > 0)) {
+		$("#report_result").text("Sending...").show().fadeOut(2000);
+		var elems = document.report_form.getElementsByTagName('*');
+		var data_post = "test=1";
+		for (var i = 0; i < elems.length; i++){if (elems[i].name) data_post=data_post+'&'+elems[i].name+'='+encodeURI(elems[i].value)};
+		try{
+		$.ajax({
+			type: "POST",
+			url: "/?action=contact_form_report",
+			data: data_post,
+			success:function(response){
+				alert(response);
+				CloseRF();
+			},
+			error: function (request, status, error) {
+				alert(request.responseText);
+				CloseRF();
+			} 
+		});
+		}catch(err){
+			alert("Error: "+err.message);
+		}
+	}else{
+		$("#report_result").text("Not valid!").show().fadeOut(2000);
+	}
+	return false;
+});

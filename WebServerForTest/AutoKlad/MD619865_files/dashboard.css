@@ -1,0 +1,240 @@
+/*Личный кабтнет - Блок для сообщений*/
+.tbMessages {
+	float: right;
+	width: 360px;
+	margin: 0 0 11px 0;
+	padding: 0 1px;
+	background: #f6f5eb;
+	border: 3px solid #efedcf;
+}
+.tbMessages th,
+.tbMessages td {
+	margin: 0;
+	padding: 1px 0 8px 8px;
+	text-align: left;
+	vertical-align: middle;
+	line-height: 12px;
+	font-size: 11px;
+	font-weight: normal;
+}
+.tbMessages th {
+	width: 101px;
+}
+.tbMessages td {
+	width: 299px;
+}
+.tbMessages th img {
+	margin: 2px 0 0 7px;
+}
+.tbMessages .tbMessages-header,
+.tbMessages .tbMessages-footer {
+	width: 408px;
+	padding: 8px 10px 8px 7px;
+	text-align: left;
+	line-height: 12px;
+	font-size: 12px;
+	font-weight: bold;
+}
+.tbMessages .tbMessages-header {
+	text-align: left;
+}
+.tbMessages .tbMessages-footer {
+	text-align: right;
+	background: #e6e7ef;
+}
+
+.tbMessages td a {
+	color: #3d3e40;
+	font-size: 12px;
+}
+.tbMessages td a:link,
+.tbMessages td a:visited {
+	text-decoration: underline;
+	color: #3d3e40;
+}
+.tbMessages td a:hover {
+	text-decoration: none;
+	color: #3d3e40;
+}
+.tbMessages td a:active {
+	text-decoration: none;
+	color: #3d3e40;
+}
+
+#wrapCO {
+	position: relative;
+	margin-bottom: 25px;
+	padding-bottom: 40px;
+}
+
+/*Личный кабинет - Набигация для таблицы Текущие заказы*/
+ul#navCO {
+	position: absolute;
+	top: 3px;
+	z-index: 10;
+	list-style: none;
+	height: 40px;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	clear: both;
+}
+ul#navCO li {
+	float: left;
+	display: inline-block;
+	margin: 0 2px 0 0;
+	padding: 0;
+/*	padding: 10px 12px 9px 15px;*/
+}
+ul#navCO li a {
+	float: left;
+	display: inline-block;
+	height: 37px;
+	padding-right: 13px;
+	background: url('/image/design/co-ul-plashka.gif') right 0 no-repeat;
+	line-height: 14px;
+	font-size: 14px;
+}
+ul#navCO li span {
+	display: inline-block;
+	float: left;
+	padding-left: 15px;
+	background: url('/image/design/co-ul-plashka.gif') left 0 no-repeat;
+	font-size: 15px;
+	line-height: 37px;
+	text-decoration: underline;
+}
+
+ul#navCO li a:link,
+ul#navCO ul li a:visited {
+	text-decoration: underline;
+}
+ul#navCO ul li a span {
+  cursor:pointer;
+}
+ul#navCO li a:hover {
+	text-decoration: none;
+}
+ul#navCO li a:hover span {
+	text-decoration: none;
+  cursor:pointer;
+}
+ul#navCO li a:active,
+ul#navCO li.active a {
+	height: 40px;
+  background: url('/image/design/co-ul-plashka.gif') no-repeat right -37px;
+  color: #373b3c;
+	text-decoration: none;
+}
+ul#navCO li a:active span,
+ul#navCO li.active a span {
+	height: 40px;
+  background: url('/image/design/co-ul-plashka.gif') no-repeat left -37px;
+  color: #373b3c;
+	text-decoration: none;
+}
+
+
+/*Личный кабинет - Таблица Текущие заказы*/
+#current-orders {
+	position: relative;
+	z-index: 5;
+	top: 40px;
+	border: 3px solid #e0be58;
+}
+#current-orders .datatable {
+	margin-bottom: 0;
+}
+/*@-moz-document url-prefix() {
+	#current-orders .datatable {
+		width: 729px;
+		margin: 2px 2px 1px 2px;
+	}
+}*/
+#current-orders .datatable .datatable-footer {
+	padding: 9px 30px 7px 7px;
+	text-align: right;
+	font-weight: bold;
+}
+
+/*Личный кабинет - Таблица В�?Н-запросы*/
+table.datatable.tbVIN td {
+	border-style: none solid solid solid;
+	border-width: 1px;
+	border-color: #d6d7e7;
+}
+table.datatable.tbVIN .datatable-footer {
+	padding: 9px 30px 7px 7px;
+	text-align: right;
+	font-weight: bold;
+}
+table.datatable.tbVIN .datatable-footer a.show {
+/*	display: inline;*/
+	padding: 0 18px 0 0;
+	font-size: 12px;
+}
+table.tbVIN td a {
+	display: block;
+	height: 18px;
+	margin: 0;
+	padding: 0 0 0 20px;
+	font-size: 11px;
+}
+table.tbVIN a.new {
+	background: url(/image/design/new-ico.png) no-repeat;
+}
+table.tbVIN a.delete {
+	background: transparent url('/image/design/delet-ico.png') 1px 0 no-repeat;
+}
+
+/*Личный кабинет - информация пользователя*/
+#account-info {
+	float: left;
+	width: 240px;
+	padding: 0 30px 0 0;
+}
+#user-avatar {
+	float: left;
+	height: 84px;
+	width: 130px;
+	margin: 0 25px 7px 0;
+	background: url('/image/design/avatar-ico.gif') no-repeat;
+}
+#account-info a, #account-info span {
+	display: block;
+	float: left;
+	margin: 0 0 7px 0;
+	line-height: 24px;
+}
+#account-info .balance {
+	padding: 0 0 0 3px;
+}
+#account-info .balance b {
+	font-size: 24px;
+}
+#account-info a.refill {
+	padding: 0 0 0 17px;
+	background: url('/image/design/refill-ico.gif') no-repeat;
+	line-height: 17px;
+}
+#account-info .settings {
+	height: 24px;
+	width: 128px;
+	margin: 0 0 0 2px;
+	text-align: center;
+	background: #f2f3f8;
+	font-size: 14px;
+}
+
+.clear {
+  clear: both;
+  height: 0;
+  font-size: 0;
+  line-height: 0;
+}
+
+a.show {
+/*	display: block;*/
+	padding: 0 18px 0 0;
+	background: url('/image/design/show-price.png') 100% 2px no-repeat;
+}

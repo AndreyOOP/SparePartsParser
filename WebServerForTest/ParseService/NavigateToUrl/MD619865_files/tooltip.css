@@ -1,0 +1,20 @@
+@charset "utf-8";
+/* CSS Document */
+.tooltip {
+	display:none;
+	width:252px;
+	z-index:1000;
+	font-size:11px;}
+
+.tooltip .th{height:1px; }
+.tooltip .tfoot{height:1px; }
+.tooltip .hint_cont{
+	border:1px solid #98b2b9;
+	background:#f1f1f1;
+	padding:15px}
+.tooltip .hint_cont h1{padding:0 0 7px; margin:0; font-size:17px; color:#68aabc; font-weight:normal; border:0;}
+.tooltip .hint_cont h2{padding:0 0 7px; margin:0; font-size:14px; color:#98b2b9; font-weight:bold; background:none}
+.tooltip .hint_cont p{margin:0; padding:4px 0; font-weight:normal}
+
+.tooltip.small{width:80px;}
+.tooltip.small .hint_cont{padding:7px; text-align:center}
