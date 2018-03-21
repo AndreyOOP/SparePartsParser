@@ -18,7 +18,7 @@ namespace CarParser0Tests.Tests.Parser
         public void AutoKladServiceParse()
         {
             var Dr = new InternetExplorerDriver("Resources/");
-            var Service = new ParseService(Dr);
+            var Service = new ParseService(Dr, new LoggerMock());
 
             var s = new AutoKladService(Service, "http://localhost:49242/AutoKlad/", new LoggerMock());
 

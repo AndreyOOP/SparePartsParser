@@ -3,79 +3,85 @@ using CarParser0.ParserNS;
 using System;
 using OpenQA.Selenium.IE;
 using System.Collections.Generic;
+using CarParser0Tests.SiteParser.ParserMocks;
+using OpenQA.Selenium;
 
 namespace CarParser0.SiteParser.Tests
 {
-    [TestClass()]
+    [TestClass, Ignore]
     public class ParseServiceTests
     {
         InternetExplorerDriver Driver;
         ParseService Service;
+        LoggerMock Logger;
 
         [TestInitialize]
         public void Setup()
         {
             Driver = new InternetExplorerDriver("Resources/");
 
-            Service = new ParseService(Driver);
+            Logger = new LoggerMock();
+
+            Service = new ParseService(Driver, Logger);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void NavigateToSiteSuccessTest()
         {
             String Url = "http://localhost:49242/ParseService/NavigatetoUrl/MD619865.htm";
 
-            Func<Boolean> isCorrectPage = () =>
-            {
-                var elem = Driver.FindElementsById("ak_rev");
+            Service.NavigateToSite(Url);
 
-                return elem.Count > 0;
-            };
-
-            Assert.IsTrue( Service.NavigateToSite(Url, isCorrectPage));
+            Assert.AreEqual(1, Driver.FindElementsById("ak_rev").Count);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void NavigateToWrongSiteTest()
         {
             String Url = "http://localhost:49242/error.htm";
 
-            Func<Boolean> isCorrectPage = () =>
-            {
-                var elem = Driver.FindElementsById("ak_rev");
+            Service.NavigateToSite(Url);
 
-                return elem.Count > 0;
-            };
-
-            Assert.IsFalse( Service.NavigateToSite(Url, isCorrectPage));
+            Assert.AreEqual(0, Driver.FindElementsById("ak_rev").Count);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void GetElementsTest()
         {
-            Service.NavigateToSite("http://localhost:49242/ParseService/NavigatetoUrl/MD619865.htm", () => { return true; });
+            Service.NavigateToSite("http://localhost:49242/ParseService/NavigatetoUrl/MD619865.htm");
 
-            var PriceElements = Service.GetElements("#central-column .search_element .search_price", (str) => { });
+            var elements = Service.GetElements("#central-column .search_element .search_price");
 
-            List<String> Actual = new List<String>();
-            foreach (var el in PriceElements)
-            {
-                Actual.Add(el.Text);
-            }
+            List<IWebElement> actual = new List<IWebElement>();
+            actual.AddRange(elements);
 
-            Assert.AreEqual(2, PriceElements.Count);
-            Assert.AreEqual("998 грн" , Actual[0]);
-            Assert.AreEqual("1816 грн", Actual[1]);
+
+            Assert.AreEqual("998 грн" , actual[0].Text);
+            Assert.AreEqual("1816 грн", actual[1].Text);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void CouldNotGetElementsTest()
         {
-            Service.NavigateToSite("http://localhost:49242/ParseService/NavigatetoUrl/MD619865.htm", () => { return true; });
+            Service.NavigateToSite("http://localhost:49242/ParseService/NavigatetoUrl/MD619865.htm");
 
-            var PriceElements = Service.GetElements("#zzz", (str) => { Console.WriteLine("Could not get element"); });
+            var elements = Service.GetElements("#zzz", "MD619865");
 
-            Assert.AreEqual(0, PriceElements.Count);
+
+            Assert.AreEqual(0, elements.Count);
+            Assert.AreEqual("MD619865 - Not Found, query - #zzz", Logger.Message);
+        }
+
+        [TestMethod]
+        public void CouldNotGetElementsIgnoreNotFoundTest()
+        {
+            Service.NavigateToSite("http://localhost:49242/ParseService/NavigatetoUrl/MD619865.htm");
+
+            var elements = Service.GetElements("#zzz", "MD619865", false);
+
+
+            Assert.AreEqual(0, elements.Count);
+            Assert.IsNull(Logger.Message);
         }
 
         [TestCleanup]

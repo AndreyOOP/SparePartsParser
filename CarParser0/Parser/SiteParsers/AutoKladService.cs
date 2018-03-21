@@ -27,21 +27,30 @@ namespace CarParser0.ParserNS.SiteParsers
 
             try
             {
-                Service.NavigateToSite(Url + item, IsLoad, OnError);
+                //Service.NavigateToSite(Url + item, IsLoad, OnError);
 
-                var elems = Service.GetElements("#central-column .search_element a", OnError);
+                //var elems = Service.GetElements("#central-column .search_element a", OnError);
 
-                foreach(var link in ToList(elems))
-                {
-                    Service.NavigateToSite(link, IsLoad, OnError);
+                ////foreach (var el in elems)
+                ////{
+                ////    var ln = el.GetAttribute("href");
 
-                    var pr = Service.GetElements("#product-top-left .plitka_price b", OnError);
+                ////    Service.NavigateToSite(ln, IsLoad, OnError);
 
-                    foreach(var p in pr)
-                    {
-                        parsed.Add(new SiteInfo(item, p.Text, "-", "AutoKlad"));
-                    }
-                }
+                ////    //...
+                ////}
+
+                //foreach (var link in ToList(elems))
+                //{
+                //    Service.NavigateToSite(link, IsLoad, OnError);
+
+                //    var pr = Service.GetElements("#product-top-left .plitka_price b", OnError);
+
+                //    foreach(var p in pr)
+                //    {
+                //        parsed.Add(new SiteInfo(item, p.Text, "-", "AutoKlad"));
+                //    }
+                //}
             }
             catch (Exception)
             {
