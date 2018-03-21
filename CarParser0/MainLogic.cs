@@ -79,7 +79,7 @@ namespace CarParser0
             Logger.Log("InternetExplorerDriver initialized");
 
             Parsers = new List<IAbstractSiteParser>() {
-                new Auto911Parser("http://911auto.com.ua/search/", Driver, Logger),
+                //new Auto911Parser("http://911auto.com.ua/search/", Driver, Logger),
                 //new AutoKlad("SiteParser/IE Driver/", Logger)
             };
             Logger.Log("Site parsers initialized");
